@@ -420,12 +420,10 @@ class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
           child: GestureDetector(
             behavior: HitTestBehavior.opaque,
             onTap: open,
-            child: SetState(
-                builder: (context) =>
-                    AnimatedBuilder(
-                      builder: _buildCart,
-                      animation: _controller,
-                    )),
+            child: AnimatedBuilder(
+              builder: _buildCart,
+              animation: _controller,
+            ),
 //            child: ScopedModelDescendant<AppStateModel>(
 //              builder: (BuildContext context, Widget child, AppStateModel model) {
 //                return AnimatedBuilder(
@@ -555,7 +553,7 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
   Widget build(BuildContext context) {
     _updateLists();
     return SetState(
-        builder: (context) => _buildAnimatedList());
+        builder: (context, obj) => _buildAnimatedList());
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext context, Widget child, AppStateModel model)
 //      => _buildAnimatedList(),
@@ -603,7 +601,7 @@ class ExtraProductsNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SetState(
-        builder: (context) => _buildOverflow());
+        builder: (context, obj) => _buildOverflow());
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext builder, Widget child, AppStateModel model)
 //      => _buildOverflow(model, context),

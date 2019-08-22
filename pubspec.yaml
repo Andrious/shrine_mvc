@@ -1,7 +1,7 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 0.1.0
+version: 0.2.0
 
 environment:
   sdk: ">=2.1.0 <3.0.0"

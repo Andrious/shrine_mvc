@@ -15,8 +15,6 @@
 import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
-import 'package:shrine_mvc/src/view.dart';
-
 import 'package:shrine_mvc/src/app/view/login.dart';
 
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
@@ -175,7 +173,7 @@ class Backdrop extends StatefulWidget {
   _BackdropState createState() => _BackdropState();
 }
 
-class _BackdropState extends StateMVC<Backdrop> with SingleTickerProviderStateMixin {
+class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin {
 
   _BackdropState():super();
 

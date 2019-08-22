@@ -25,6 +25,8 @@ import 'package:flutter/material.dart';
 
 import 'package:shrine_mvc/src/view.dart';
 
+import 'package:shrine_mvc/src/home/model/app_state_model.dart';
+
 import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
 
 
@@ -44,13 +46,15 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
   @override
   void initState() {
     super.initState();
+    object = AppStateModel();
+    (object as AppStateModel).loadProducts();
     aniController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 450),
       value: 1.0,
     );
   }
-
+  
   // Copy the platform from the main theme in order to support platform
   // toggling from the Gallery options menu.
   @override

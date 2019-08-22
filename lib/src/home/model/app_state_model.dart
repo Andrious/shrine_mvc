@@ -28,13 +28,13 @@ double _shippingCostPerItem = 7.0;
 
 class AppStateModel extends ControllerMVC {
   //} extends Model {
-  factory AppStateModel([StateMVC state]) {
-    _this ??= AppStateModel._(state);
+  factory AppStateModel() {
+    _this ??= AppStateModel._();
     return _this;
   }
   static AppStateModel _this;
 
-  AppStateModel._(StateMVC state): super(state);
+  AppStateModel._();
 
   // All the available products.
   List<Product> _availableProducts;

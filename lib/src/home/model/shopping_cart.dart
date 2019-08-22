@@ -57,7 +57,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
       body: SafeArea(
         child: Container(
           child: SetState(
-              builder: (context) => Stack(
+              builder: (context, anItem) => Stack(
                     children: <Widget>[
                       ListView(
                         children: <Widget>[

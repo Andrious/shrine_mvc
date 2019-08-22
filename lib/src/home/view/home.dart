@@ -32,9 +32,11 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SetState(
-        builder: (context) =>
-            AsymmetricView(products: AppStateModel().getProducts()));
+    return SetState(builder: (context, whatever) {
+      AppStateModel model = whatever;
+//      return AsymmetricView(products: AppStateModel().getProducts());
+      return AsymmetricView(products: model.getProducts());
+    });
 //    return ScopedModelDescendant<AppStateModel>(
 //        builder: (BuildContext context, Widget child, AppStateModel model) {
 //      return AsymmetricView(products: model.getProducts());
@@ -54,7 +56,6 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    AppStateModel(App.state).loadProducts();
     Widget child = expandingBottomSheet ??
         ExpandingBottomSheet(hideController: ShrineApp.aniController);
 
