@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:shrine_mvc/src/appOld.dart';
+import 'package:shrine_mvc/src/view.dart' show ShrineApp;
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {

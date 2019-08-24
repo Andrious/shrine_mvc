@@ -45,7 +45,7 @@ class ProductCard extends StatelessWidget {
     );
 //    package: product.assetPackage,
 
-    return SetState(builder: (context, obj) => GestureDetector(
+    return SetState(builder: (context, _) => GestureDetector(
       onTap: () {
         AppStateModel().addProductToCart(product.id);
       },

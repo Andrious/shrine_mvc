@@ -553,7 +553,7 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
   Widget build(BuildContext context) {
     _updateLists();
     return SetState(
-        builder: (context, obj) => _buildAnimatedList());
+        builder: (context, object) => _buildAnimatedList());
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext context, Widget child, AppStateModel model)
 //      => _buildAnimatedList(),
