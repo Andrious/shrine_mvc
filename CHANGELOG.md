@@ -1,3 +1,7 @@
+## 0.4.0
+ August 31, 2019
+- static Future<I18n> load()
+
 ## 0.3.1
  August 30, 2019
 - i18n Internationalization capability

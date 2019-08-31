@@ -49,8 +49,8 @@ class CategoryMenuPage extends StatelessWidget {
                   ? Column(
                       children: <Widget>[
                         const SizedBox(height: 16.0),
-                        Text(
-                          I18n.s(categoryString),
+                        I18n.t(
+                          categoryString,
                           style: theme.textTheme.body2,
                           textAlign: TextAlign.center,
                         ),
@@ -64,8 +64,8 @@ class CategoryMenuPage extends StatelessWidget {
                     )
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Text(
-                        I18n.s(categoryString),
+                      child: I18n.t(
+                        categoryString,
                         style: theme.textTheme.body2
                             .copyWith(color: kShrineBrown900.withAlpha(153)),
                         textAlign: TextAlign.center,
