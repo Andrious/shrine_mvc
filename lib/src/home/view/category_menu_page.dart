@@ -13,13 +13,17 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I18n;
 
-import 'package:shrine_mvc/src/app/view/colors.dart';
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-import 'package:shrine_mvc/src/home/model/product.dart';
+import 'package:shrine_mvc/src/view.dart'
+    show
+        SetState,
+        kShrineBrown900,
+        kShrinePink100,
+        kShrinePink400;
 
 class CategoryMenuPage extends StatelessWidget {
   const CategoryMenuPage({
@@ -46,7 +50,7 @@ class CategoryMenuPage extends StatelessWidget {
                       children: <Widget>[
                         const SizedBox(height: 16.0),
                         Text(
-                          categoryString,
+                          I18n.s(categoryString),
                           style: theme.textTheme.body2,
                           textAlign: TextAlign.center,
                         ),
@@ -61,7 +65,7 @@ class CategoryMenuPage extends StatelessWidget {
                   : Padding(
                       padding: const EdgeInsets.symmetric(vertical: 16.0),
                       child: Text(
-                        categoryString,
+                        I18n.s(categoryString),
                         style: theme.textTheme.body2
                             .copyWith(color: kShrineBrown900.withAlpha(153)),
                         textAlign: TextAlign.center,

@@ -13,15 +13,21 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import 'package:intl/intl.dart' show NumberFormat;
+
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, Product;
 
-import 'package:shrine_mvc/src/app/view/colors.dart';
-import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-import 'package:shrine_mvc/src/home/model/product.dart';
+import 'package:shrine_mvc/src/view.dart'
+    show
+        ExpandingBottomSheet,
+        SetState,
+        kShrineBrown600,
+        kShrineBrown900,
+        kShrinePink100,
+        kShrinePink50;
 
 const double _leftColumnWidth = 60.0;
 

@@ -13,13 +13,14 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+
+import 'package:intl/intl.dart' show NumberFormat;
+
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/view.dart' show SetState;
 
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-import 'package:shrine_mvc/src/home/model/product.dart';
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, Product;
 
 class ProductCard extends StatelessWidget {
   const ProductCard({this.imageAspectRatio = 33 / 49, this.product})

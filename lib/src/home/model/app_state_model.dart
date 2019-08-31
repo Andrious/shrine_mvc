@@ -14,14 +14,12 @@
 
 //import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
-
-import 'package:shrine_mvc/src/controller.dart';
-
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/home/model/product.dart';
-import 'package:shrine_mvc/src/home/model/products_repository.dart';
+import 'package:shrine_mvc/src/model.dart'
+    show Category, Product, ProductsRepository;
+
+import 'package:shrine_mvc/src/controller.dart' show ControllerMVC;
 
 double _salesTaxRate = 0.06;
 double _shippingCostPerItem = 7.0;
@@ -95,7 +93,7 @@ class AppStateModel extends ControllerMVC {
       _productsInCart[productId]++;
     }
 //    notifyListeners();
-     refresh();
+    refresh();
   }
 
   // Removes an item from the cart.
@@ -108,7 +106,7 @@ class AppStateModel extends ControllerMVC {
       }
     }
 //    notifyListeners();
-     refresh();
+    refresh();
   }
 
   // Returns the Product instance matching the provided id.
@@ -120,7 +118,7 @@ class AppStateModel extends ControllerMVC {
   void clearCart() {
     _productsInCart.clear();
 //    notifyListeners();
-     refresh();
+    refresh();
   }
 
   // Loads the list of available products from the repo.

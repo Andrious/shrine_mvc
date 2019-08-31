@@ -23,11 +23,24 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:shrine_mvc/src/view.dart';
-
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-
 import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
+
+import 'package:shrine_mvc/src/model.dart'
+    show AppStateModel, I18n, I18nDelegate;
+
+import 'package:shrine_mvc/src/view.dart'
+    show
+        App,
+        AppView,
+        CutCornersBorder,
+        HomePage,
+        LoginPage,
+        kShrineBackgroundWhite,
+        kShrineBrown900,
+        kShrineErrorRed,
+        kShrinePink100,
+        kShrinePink50,
+        kShrineSurfaceWhite;
 
 
 class ShrineApp extends AppView with SingleTickerProviderStateMixin {
@@ -37,24 +50,32 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
 
   ShrineApp()
       : super(
-          title: 'Shrine',
           home: HomePage(),
+          title: I18n.s('Shrine'),
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
+          debugShowCheckedModeBanner: false,
+          localizationsDelegates: [
+            const I18nDelegate(),
+          ],
+          supportedLocales: [
+            const Locale('en', ''),
+            const Locale('fr', ''),
+            const Locale('es', ''),
+          ],
         );
 
   @override
   void initState() {
     super.initState();
     object = AppStateModel();
-    (object as AppStateModel).loadProducts();
     aniController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 450),
       value: 1.0,
     );
   }
-  
+
   // Copy the platform from the main theme in order to support platform
   // toggling from the Gallery options menu.
   @override

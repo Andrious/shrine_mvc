@@ -14,7 +14,9 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:shrine_mvc/src/app/view/colors.dart';
+import 'package:shrine_mvc/src/model.dart' show I18n;
+
+import 'package:shrine_mvc/src/view.dart' show kShrineBrown900;
 
 class LoginPage extends StatefulWidget {
   @override
@@ -53,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image.asset('assets/diamond.png'),
                 const SizedBox(height: 16.0),
                 Text(
-                  'SHRINE',
+                  I18n.s('SHRINE'),
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
@@ -63,8 +65,8 @@ class _LoginPageState extends State<LoginPage> {
               color: kShrineBrown900,
               child: TextField(
                 controller: _usernameController,
-                decoration: const InputDecoration(
-                  labelText: 'Username',
+                decoration: InputDecoration(
+                  labelText: I18n.s('Username'),
                 ),
               ),
             ),
@@ -73,8 +75,8 @@ class _LoginPageState extends State<LoginPage> {
               color: kShrineBrown900,
               child: TextField(
                 controller: _passwordController,
-                decoration: const InputDecoration(
-                  labelText: 'Password',
+                decoration: InputDecoration(
+                  labelText: I18n.s('Password'),
                 ),
               ),
             ),
@@ -83,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 ButtonBar(
                   children: <Widget>[
                     FlatButton(
-                      child: const Text('CANCEL'),
+                      child: I18n.t('Cancel'),
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
@@ -96,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     RaisedButton(
-                      child: const Text('NEXT'),
+                      child: I18n.t('Next'),
                       elevation: 8.0,
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
@@ -117,7 +119,8 @@ class _LoginPageState extends State<LoginPage> {
 }
 
 class PrimaryColorOverride extends StatelessWidget {
-  const PrimaryColorOverride({Key key, this.color, this.child}) : super(key: key);
+  const PrimaryColorOverride({Key key, this.color, this.child})
+      : super(key: key);
 
   final Color color;
   final Widget child;

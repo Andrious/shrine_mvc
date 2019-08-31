@@ -1,7 +1,7 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 0.3.0
+version: 0.3.1
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -10,12 +10,17 @@ dependencies:
   flutter:
     sdk: flutter
 
+  flutter_localizations:
+    sdk: flutter
+
   mvc_application: ^1.1.0
-#    path: ../../packages/mvc_application
+ #   path: ../../packages/mvc_application
 
   intl: ^0.15.8
 
   scoped_model: ^1.0.1
+
+  path_provider: 
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -25,6 +30,8 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  flappy_translator:
 
 
 # For information on the generic Dart part of this file, see the

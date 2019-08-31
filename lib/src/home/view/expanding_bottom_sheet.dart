@@ -12,19 +12,25 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'dart:async';
+import 'dart:async' show Future;
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:meta/meta.dart';
+
+import 'package:flutter/services.dart' show SystemNavigator;
+
+import 'package:meta/meta.dart' show required;
+
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/model.dart'
+    show AppStateModel, Product, ShoppingCartPage;
 
-import 'package:shrine_mvc/src/app/view/colors.dart';
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-import 'package:shrine_mvc/src/home/model/product.dart';
-import 'package:shrine_mvc/src/home/model/shopping_cart.dart';
+import 'package:shrine_mvc/src/view.dart'
+    show
+        App,
+        SetState,
+        StateMVC,
+        kShrinePink50;
 
 // These curves define the emphasized easing curve.
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
@@ -552,8 +558,7 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
   @override
   Widget build(BuildContext context) {
     _updateLists();
-    return SetState(
-        builder: (context, object) => _buildAnimatedList());
+    return SetState(builder: (context, object) => _buildAnimatedList());
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext context, Widget child, AppStateModel model)
 //      => _buildAnimatedList(),
@@ -600,8 +605,7 @@ class ExtraProductsNumber extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SetState(
-        builder: (context, obj) => _buildOverflow());
+    return SetState(builder: (context, obj) => _buildOverflow());
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext builder, Widget child, AppStateModel model)
 //      => _buildOverflow(model, context),

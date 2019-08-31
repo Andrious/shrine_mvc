@@ -13,17 +13,19 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I18n;
 
-import 'package:shrine_mvc/src/home/view/backdrop.dart';
-import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
-import 'package:shrine_mvc/src/home/view/category_menu_page.dart';
-
-import 'package:shrine_mvc/src/home/model/app_state_model.dart';
-import 'package:shrine_mvc/src/home/model/product.dart';
-import 'package:shrine_mvc/src/app/supplemental/asymmetric_view.dart';
+import 'package:shrine_mvc/src/view.dart'
+    show
+        AsymmetricView,
+        Backdrop,
+        CategoryMenuPage,
+        ExpandingBottomSheet,
+        SetState,
+        ShrineApp;
 
 class ProductPage extends StatelessWidget {
   const ProductPage({this.category = Category.all});
@@ -34,6 +36,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return SetState(builder: (context, whatever) {
       AppStateModel model = whatever;
+      model.loadProducts();
 //      return AsymmetricView(products: AppStateModel().getProducts());
       return AsymmetricView(products: model.getProducts());
     });
@@ -65,8 +68,8 @@ class HomePage extends StatelessWidget {
           frontLayer: const ProductPage(),
           backLayer: CategoryMenuPage(
               onCategoryTap: () => ShrineApp.aniController.forward()),
-          frontTitle: const Text('SHRINE'),
-          backTitle: const Text('MENU'),
+          frontTitle: I18n.t('Shrine'),
+          backTitle: I18n.t('Menu'),
           controller: ShrineApp.aniController,
         ),
         Align(child: child, alignment: Alignment.bottomRight),

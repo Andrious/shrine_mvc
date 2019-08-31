@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show Color, Colors;
 
 const Color kShrinePink50 = Color(0xFFFEEAE6);
 const Color kShrinePink100 = Color(0xFFFEDBD0);

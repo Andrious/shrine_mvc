@@ -13,9 +13,12 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
-import 'package:meta/meta.dart';
 
-import 'package:shrine_mvc/src/app/view/login.dart';
+import 'package:meta/meta.dart' show required;
+
+import 'package:shrine_mvc/src/view.dart' show App, LoginPage;
+
+import 'package:shrine_mvc/src/model.dart' show I18n;
 
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
 const Cubic _kDecelerateCurve = Cubic(0.23, 0.94, 0.41, 1.0);
@@ -66,9 +69,9 @@ class _BackdropTitle extends AnimatedWidget {
     this.onPress,
     @required this.frontTitle,
     @required this.backTitle,
-  }) : assert(frontTitle != null),
-       assert(backTitle != null),
-       super(key: key, listenable: listenable);
+  })  : assert(frontTitle != null),
+        assert(backTitle != null),
+        super(key: key, listenable: listenable);
 
   final Function onPress;
   final Widget frontTitle;
@@ -157,11 +160,11 @@ class Backdrop extends StatefulWidget {
     @required this.frontTitle,
     @required this.backTitle,
     @required this.controller,
-  }) : assert(frontLayer != null),
-       assert(backLayer != null),
-       assert(frontTitle != null),
-       assert(backTitle != null),
-       assert(controller != null);
+  })  : assert(frontLayer != null),
+        assert(backLayer != null),
+        assert(frontTitle != null),
+        assert(backTitle != null),
+        assert(controller != null);
 
   final Widget frontLayer;
   final Widget backLayer;
@@ -173,9 +176,9 @@ class Backdrop extends StatefulWidget {
   _BackdropState createState() => _BackdropState();
 }
 
-class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin {
-
-  _BackdropState():super();
+class _BackdropState extends State<Backdrop>
+    with SingleTickerProviderStateMixin {
+  _BackdropState() : super();
 
   final GlobalKey _backdropKey = GlobalKey(debugLabel: 'Backdrop');
   AnimationController _controller;
@@ -195,7 +198,8 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
 
   bool get _frontLayerVisible {
     final AnimationStatus status = _controller.status;
-    return status == AnimationStatus.completed || status == AnimationStatus.forward;
+    return status == AnimationStatus.completed ||
+        status == AnimationStatus.forward;
   }
 
   void _toggleBackdropLayerVisibility() {
@@ -308,19 +312,12 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
           onPressed: () {
             Navigator.push<void>(
               context,
-              MaterialPageRoute<void>(builder: (BuildContext context) => LoginPage()),
+              MaterialPageRoute<void>(
+                  builder: (BuildContext context) => LoginPage()),
             );
           },
         ),
-        IconButton(
-          icon: const Icon(Icons.tune, semanticLabel: 'login'),
-          onPressed: () {
-            Navigator.push<void>(
-              context,
-              MaterialPageRoute<void>(builder: (BuildContext context) => LoginPage()),
-            );
-          },
-        ),
+        menuButton(),
       ],
     );
     return Scaffold(
@@ -328,6 +325,20 @@ class _BackdropState extends State<Backdrop> with SingleTickerProviderStateMixin
       body: LayoutBuilder(
         builder: _buildStack,
       ),
+    );
+  }
+
+  PopupMenuButton<String> menuButton() {
+    return PopupMenuButton<String>(
+      onSelected: (String value) {
+        I18n.load(Locale(value));
+        App.refresh();
+      },
+      itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[
+        const PopupMenuItem<String>(value: 'en', child: Text('en')),
+        const PopupMenuItem<String>(value: 'fr', child: Text('fr')),
+        const PopupMenuItem<String>(value: 'es', child: Text('es')),
+      ],
     );
   }
 }

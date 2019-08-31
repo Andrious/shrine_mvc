@@ -21,4 +21,12 @@
 ///
 ///
 
+export 'package:shrine_mvc/src/home/model/app_state_model.dart';
 
+export 'package:shrine_mvc/src/home/model/product.dart';
+
+export 'package:shrine_mvc/src/home/model/shopping_cart.dart';
+
+export 'package:shrine_mvc/src/home/model/products_repository.dart';
+
+export 'package:shrine_mvc/src/home/model/i18n.dart';
