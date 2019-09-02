@@ -34,16 +34,8 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SetState(builder: (context, whatever) {
-      AppStateModel model = whatever;
-      model.loadProducts();
-//      return AsymmetricView(products: AppStateModel().getProducts());
-      return AsymmetricView(products: model.getProducts());
-    });
-//    return ScopedModelDescendant<AppStateModel>(
-//        builder: (BuildContext context, Widget child, AppStateModel model) {
-//      return AsymmetricView(products: model.getProducts());
-//    });
+    AppStateModel().loadProducts();
+    return AsymmetricView(products: AppStateModel().getProducts());
   }
 }
 
@@ -62,18 +54,20 @@ class HomePage extends StatelessWidget {
     Widget child = expandingBottomSheet ??
         ExpandingBottomSheet(hideController: ShrineApp.aniController);
 
-    return Stack(
-      children: <Widget>[
-        Backdrop(
-          frontLayer: const ProductPage(),
-          backLayer: CategoryMenuPage(
-              onCategoryTap: () => ShrineApp.aniController.forward()),
-          frontTitle: I18n.t('Shrine'),
-          backTitle: I18n.t('Menu'),
-          controller: ShrineApp.aniController,
-        ),
-        Align(child: child, alignment: Alignment.bottomRight),
-      ],
-    );
+    return SetState(builder: (context, _) {
+      return Stack(
+        children: <Widget>[
+          Backdrop(
+            frontLayer: ProductPage(),
+            backLayer: CategoryMenuPage(
+                onCategoryTap: () => ShrineApp.aniController.forward()),
+            frontTitle: I18n.t('Shrine'),
+            backTitle: I18n.t('Menu'),
+            controller: ShrineApp.aniController,
+          ),
+          Align(child: child, alignment: Alignment.bottomRight),
+        ],
+      );
+    });
   }
 }

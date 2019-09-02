@@ -1,3 +1,7 @@
+## 0.6.0
+ Sept. 02, 2019
+- SetState(builder: (context, _) { in HomePage class
+
 ## 0.5.0
  Sept. 02, 2019
 - import 'package:flutter_localizations/flutter_localizations.dart';  
