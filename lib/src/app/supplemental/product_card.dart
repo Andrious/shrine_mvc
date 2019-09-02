@@ -46,51 +46,55 @@ class ProductCard extends StatelessWidget {
     );
 //    package: product.assetPackage,
 
-    return SetState(builder: (context, _) => GestureDetector(
-      onTap: () {
-        AppStateModel().addProductToCart(product.id);
-      },
-      child: Stack(
-        children: <Widget>[
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              AspectRatio(
-                aspectRatio: imageAspectRatio,
-                child: imageWidget,
+    return SetState(
+        builder: (context, _) => GestureDetector(
+              onTap: () {
+                AppStateModel().addProductToCart(product.id);
+              },
+              child: Stack(
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget>[
+                      AspectRatio(
+                        aspectRatio: imageAspectRatio,
+                        child: imageWidget,
+                      ),
+                      SizedBox(
+                        height: kTextBoxHeight *
+                            MediaQuery.of(context).textScaleFactor,
+                        width: 121.0,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: <Widget>[
+                            Text(
+                              product == null ? '' : product.name,
+                              style: theme.textTheme.button,
+                              softWrap: false,
+                              overflow: TextOverflow.ellipsis,
+                              maxLines: 1,
+                            ),
+                            const SizedBox(height: 4.0),
+                            Text(
+                              product == null
+                                  ? ''
+                                  : formatter.format(product.price),
+                              style: theme.textTheme.caption,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Icon(Icons.add_shopping_cart),
+                  ),
+                ],
               ),
-              SizedBox(
-                height: kTextBoxHeight * MediaQuery.of(context).textScaleFactor,
-                width: 121.0,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Text(
-                      product == null ? '' : product.name,
-                      style: theme.textTheme.button,
-                      softWrap: false,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                    ),
-                    const SizedBox(height: 4.0),
-                    Text(
-                      product == null ? '' : formatter.format(product.price),
-                      style: theme.textTheme.caption,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          const Padding(
-            padding: EdgeInsets.all(16.0),
-            child: Icon(Icons.add_shopping_cart),
-          ),
-        ],
-      ),
-    ));
+            ));
 
 //    return ScopedModelDescendant<AppStateModel>(
 //      builder: (BuildContext context, Widget child, AppStateModel model) {

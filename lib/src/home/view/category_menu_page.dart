@@ -19,11 +19,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I18n;
 
 import 'package:shrine_mvc/src/view.dart'
-    show
-        SetState,
-        kShrineBrown900,
-        kShrinePink100,
-        kShrinePink400;
+    show SetState, kShrineBrown900, kShrinePink100, kShrinePink400;
 
 class CategoryMenuPage extends StatelessWidget {
   const CategoryMenuPage({

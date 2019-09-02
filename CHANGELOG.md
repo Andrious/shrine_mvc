@@ -1,3 +1,7 @@
+## 0.4.1
+ Sept. 01, 2019
+- factory I18nDelegate
+
 ## 0.4.0
  August 31, 2019
 - static Future<I18n> load()

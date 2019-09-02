@@ -42,7 +42,6 @@ import 'package:shrine_mvc/src/view.dart'
         kShrinePink50,
         kShrineSurfaceWhite;
 
-
 class ShrineApp extends AppView with SingleTickerProviderStateMixin {
   // Controller to coordinate both the opening/closing of backdrop and sliding
   // of expanding bottom sheet
@@ -56,7 +55,7 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
-            const I18nDelegate(),
+            I18nDelegate(),
           ],
           supportedLocales: [
             const Locale('en', ''),

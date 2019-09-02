@@ -13,7 +13,7 @@ class I18n {
   static Future<I18n> load([Locale locale]) async {
     locale ??= _locale;
     _locale = locale;
-    _localizedValues = _delegate.isSupported(locale)
+    _localizedValues = I18nDelegate().isSupported(locale)
         ? _allValues[locale.languageCode]
         : _allValues["en"];
     return _this ??= I18n._();
@@ -22,15 +22,13 @@ class I18n {
   static I18n _this;
   I18n._();
 
-  static I18nDelegate _delegate = I18nDelegate();
-
   static Map<String, Map<String, String>> _allValues = {
     "en": _enValues,
     "fr": _frValues,
     "es": _esValues,
   };
 
-  static I18n of(BuildContext context) => Localizations.of<I18n>(context, I18n);
+//  static I18n of(BuildContext context) => Localizations.of<I18n>(context, I18n);
 
   /// Supply a Text object for the translation.
   static Text t(
@@ -260,7 +258,13 @@ class I18n {
 }
 
 class I18nDelegate extends LocalizationsDelegate<I18n> {
-  const I18nDelegate();
+  /// No need for more than one instance.
+  factory I18nDelegate() {
+    _this ??= I18nDelegate._();
+    return _this;
+  }
+  I18nDelegate._();
+  static I18nDelegate _this;
 
   static bool reload = false;
 
