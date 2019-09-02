@@ -23,6 +23,9 @@
 
 import 'package:flutter/material.dart';
 
+import 'package:flutter_localizations/flutter_localizations.dart'
+    show GlobalMaterialLocalizations, GlobalWidgetsLocalizations;
+
 import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
 
 import 'package:shrine_mvc/src/model.dart'
@@ -50,18 +53,19 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
   ShrineApp()
       : super(
           home: HomePage(),
-          title: I18n.s('Shrine'),
+//          title: I18n.s('Shrine'),
+          onGenerateTitle: (context) {
+            return I18n.s('Shrine');
+          },
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
+            GlobalMaterialLocalizations.delegate,
+            GlobalWidgetsLocalizations.delegate,
             I18nDelegate(),
           ],
-          supportedLocales: [
-            const Locale('en', ''),
-            const Locale('fr', ''),
-            const Locale('es', ''),
-          ],
+          supportedLocales: I18n.supportedLocales,
         );
 
   @override

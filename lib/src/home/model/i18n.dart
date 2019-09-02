@@ -28,6 +28,12 @@ class I18n {
     "es": _esValues,
   };
 
+  static final List<Locale> supportedLocales = [
+    const Locale('en'),
+    const Locale('fr'),
+    const Locale('es'),
+  ];
+
 //  static I18n of(BuildContext context) => Localizations.of<I18n>(context, I18n);
 
   /// Supply a Text object for the translation.
@@ -111,7 +117,7 @@ class I18n {
     "ALL": "ALL",
     "ACCESSORIES": "ACCESSORIES",
     "CLOTHING": "CLOTHING",
-    "HOME": "Home",
+    "HOME": "HOME",
     "Vagabond sack": "Vagabond sack",
     "Stella sunglasses": "Stella sunglasses",
     "Whitney belt": "Whitney belt",
@@ -162,7 +168,7 @@ class I18n {
     "Menu": "Menu",
     "ALL": "Tout",
     "ACCESSORIES": "ACCESSOIRES",
-    "CLOTHING": "Vêtements",
+    "CLOTHING": "VÊTEMENTS",
     "HOME": "ACCUEIL",
     "Vagabond sack": "Sac vagabond",
     "Stella sunglasses": "Stella des lunettes de soleil",
