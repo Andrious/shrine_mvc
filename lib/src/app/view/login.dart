@@ -14,7 +14,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:shrine_mvc/src/model.dart' show I18n;
+import 'package:shrine_mvc/src/model.dart' show I10n;
 
 import 'package:shrine_mvc/src/view.dart' show kShrineBrown900;
 
@@ -55,7 +55,7 @@ class _LoginPageState extends State<LoginPage> {
                 Image.asset('assets/diamond.png'),
                 const SizedBox(height: 16.0),
                 Text(
-                  I18n.s('SHRINE'),
+                  I10n.s('SHRINE'),
                   style: Theme.of(context).textTheme.headline,
                 ),
               ],
@@ -66,7 +66,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  labelText: I18n.s('Username'),
+                  labelText: I10n.s('Username'),
                 ),
               ),
             ),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  labelText: I18n.s('Password'),
+                  labelText: I10n.s('Password'),
                 ),
               ),
             ),
@@ -85,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                 ButtonBar(
                   children: <Widget>[
                     FlatButton(
-                      child: I18n.t('Cancel'),
+                      child: I10n.t('Cancel'),
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),
                       ),
@@ -98,7 +98,7 @@ class _LoginPageState extends State<LoginPage> {
                       },
                     ),
                     RaisedButton(
-                      child: I18n.t('Next'),
+                      child: I10n.t('Next'),
                       elevation: 8.0,
                       shape: const BeveledRectangleBorder(
                         borderRadius: BorderRadius.all(Radius.circular(7.0)),

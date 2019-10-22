@@ -16,9 +16,11 @@ import 'package:flutter/material.dart';
 
 import 'package:meta/meta.dart' show required;
 
+import 'package:prefs/prefs.dart' show Prefs;
+
 import 'package:shrine_mvc/src/view.dart' show App, LoginPage;
 
-import 'package:shrine_mvc/src/model.dart' show I18n;
+import 'package:shrine_mvc/src/model.dart' show I10n;
 
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
 const Cubic _kDecelerateCurve = Cubic(0.23, 0.94, 0.41, 1.0);
@@ -331,7 +333,8 @@ class _BackdropState extends State<Backdrop>
   PopupMenuButton<String> menuButton() {
     return PopupMenuButton<String>(
       onSelected: (String value) {
-        I18n.load(Locale(value));
+        I10n.load(Locale(value));
+        Prefs.setString('locale', value);
         App.refresh();
       },
       itemBuilder: (BuildContext context) => <PopupMenuItem<String>>[

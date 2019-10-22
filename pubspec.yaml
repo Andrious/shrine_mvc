@@ -4,35 +4,38 @@ description: The Shrine Sample App using the MVC design pattern.
 version: 0.6.0
 
 environment:
-  sdk: ">=2.2.2 <3.0.0"
+  sdk: ">=2.3.0 <3.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-  flutter_localizations:
-    sdk: flutter
+## https://pub.dev/packages/flutter_cupertino_localizations
+#  flutter_cupertino_localizations: ^1.0.0
 
-  mvc_application: ^1.1.0
-   # path: ../../packages/mvc_application
+# https://pub.dev/packages/mvc_application
+  mvc_application: ^1.0.0
+#    path: ../../packages/mvc_application
 
-  intl: ^0.15.8
+#  flutter_i18n: ^0.7.0
 
-  scoped_model: ^1.0.1
+# https://pub.dev/packages/scoped_model
+  scoped_model: ^1.0.0
 
-  path_provider: 
-
+# https://pub.dev/packages/path_provider
+  path_provider: ^1.0.0
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^0.1.2
+# https://pub.dev/packages/cupertino_icons
+  cupertino_icons: ^0.1.0
+
+  flutter_localizations:
+    sdk: flutter
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-
-  flappy_translator:
-
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -40,6 +43,7 @@ dev_dependencies:
 # The following section is specific to Flutter.
 flutter:
   assets:
+    - assets/i10n/i10n.csv
     - assets/diamond.png
     - assets/slanted_menu.png
     - assets/0-0.jpg

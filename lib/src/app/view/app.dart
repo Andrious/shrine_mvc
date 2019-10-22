@@ -24,12 +24,14 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart'
-    show GlobalMaterialLocalizations, GlobalWidgetsLocalizations;
+    show GlobalCupertinoLocalizations, GlobalMaterialLocalizations, GlobalWidgetsLocalizations;
 
-import 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
+import 'package:prefs/prefs.dart' show Prefs;
 
 import 'package:shrine_mvc/src/model.dart'
-    show AppStateModel, I18n, I18nDelegate;
+    show AppStateModel, I10n, I10nDelegate;
+
+import 'package:shrine_mvc/src/controller.dart' as c;
 
 import 'package:shrine_mvc/src/view.dart'
     show
@@ -52,20 +54,18 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
 
   ShrineApp()
       : super(
+          con: c.ShrineApp(),
           home: HomePage(),
-//          title: I18n.s('Shrine'),
-          onGenerateTitle: (context) {
-            return I18n.s('Shrine');
-          },
+          onGenerateTitle: (context) => I10n.s('Shrine'),
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
-            I18nDelegate(),
+            GlobalCupertinoLocalizations.delegate,
+            I10nDelegate(),
           ],
-          supportedLocales: I18n.supportedLocales,
         );
 
   @override
@@ -84,6 +84,15 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
   @override
   ThemeData onTheme() =>
       _kShrineTheme.copyWith(platform: Theme.of(App.context).platform);
+
+  @override
+  Locale onLocale() {
+    final locale = Prefs.getString('locale', 'en');
+    return Locale(locale);
+  }
+
+  @override
+  Iterable<Locale> onSupportedLocales() => I10n.supportedLocales;
 }
 
 Route<dynamic> _getRoute(RouteSettings settings) {

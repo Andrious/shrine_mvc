@@ -22,3 +22,6 @@
 ///
 
 export 'package:mvc_application/controller.dart';
+
+export 'package:shrine_mvc/src/app/controller/app.dart';
+

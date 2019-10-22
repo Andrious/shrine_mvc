@@ -1,7 +1,4 @@
 # shrine_mvc
 
-The Shrine Sample App in MVC
-
-## Using the MVC Design Pattern
-
+The Shrine Sample App using MVC Library Package
 

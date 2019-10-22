@@ -130,7 +130,6 @@ class AppStateModel extends ControllerMVC {
   void setCategory(Category newCategory) {
     _selectedCategory = newCategory;
 //    notifyListeners();
-    refresh();
   }
 
   @override

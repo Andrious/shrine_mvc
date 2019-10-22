@@ -1,3 +1,8 @@
+## 1.0.0
+ October 22, 2019
+- Release as 1.0.0 in semantic version number
+- Introduced i10n_translator library package
+
 ## 0.6.0
  Sept. 02, 2019
 - SetState(builder: (context, _) { in HomePage class

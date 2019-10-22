@@ -17,20 +17,21 @@
 /// See the License for the specific language governing permissions and
 /// limitations under the License.
 ///
-///          Created  17 Aug 2019
+///          Created  09 Oct 2019
 ///
 ///
 
-export 'package:shrine_mvc/src/home/model/app_state_model.dart';
+import 'package:shrine_mvc/src/model.dart' show i10nWords;
 
-export 'package:shrine_mvc/src/home/model/product.dart';
+import 'package:shrine_mvc/src/controller.dart' show AppController;
 
-export 'package:shrine_mvc/src/home/model/shopping_cart.dart';
+import 'package:shrine_mvc/src/view.dart' show I10n;
 
-export 'package:shrine_mvc/src/home/model/products_repository.dart';
-
-export 'package:shrine_mvc/src/home/model/i10n_words.dart';
-
-export 'package:i10n_translator/i10n.dart';
+class ShrineApp extends AppController {
+  @override
+  initApp() {
+    I10n.init();
+  }
+}
 
 

@@ -26,7 +26,7 @@ import 'package:shrine_mvc/src/model.dart'
     show AppStateModel, Product, ShoppingCartPage;
 
 import 'package:shrine_mvc/src/view.dart'
-    show App, SetState, StateMVC, kShrinePink50;
+    show App, Controllers, SetState, ViewMVC, kShrinePink50;
 
 // These curves define the emphasized easing curve.
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);
@@ -120,9 +120,9 @@ double _getPeakPoint({double begin, double end}) {
   return begin + (end - begin) * _kPeakVelocityProgress;
 }
 
-class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
+class _ExpandingBottomSheetState extends ViewMVC<ExpandingBottomSheet>
     with TickerProviderStateMixin {
-  _ExpandingBottomSheetState() : super(AppStateModel());
+  _ExpandingBottomSheetState() : super(controller: AppStateModel());
 
   final GlobalKey _expandingBottomSheetKey =
       GlobalKey(debugLabel: 'Expanding bottom sheet');
@@ -407,7 +407,7 @@ class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget buildView(BuildContext context) {
     return AnimatedSize(
       key: _expandingBottomSheetKey,
       duration: const Duration(milliseconds: 225),

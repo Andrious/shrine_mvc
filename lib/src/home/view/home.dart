@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I18n;
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I10n;
 
 import 'package:shrine_mvc/src/view.dart'
     show
@@ -26,6 +26,7 @@ import 'package:shrine_mvc/src/view.dart'
         ExpandingBottomSheet,
         SetState,
         ShrineApp;
+import 'package:shrine_mvc/src/view.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({this.category = Category.all});
@@ -61,8 +62,8 @@ class HomePage extends StatelessWidget {
             frontLayer: ProductPage(),
             backLayer: CategoryMenuPage(
                 onCategoryTap: () => ShrineApp.aniController.forward()),
-            frontTitle: I18n.t('Shrine'),
-            backTitle: I18n.t('Menu'),
+            frontTitle: I10n.t('Shrine'),
+            backTitle: I10n.t('Menu'),
             controller: ShrineApp.aniController,
           ),
           Align(child: child, alignment: Alignment.bottomRight),
