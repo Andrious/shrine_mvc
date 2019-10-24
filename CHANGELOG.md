@@ -1,3 +1,8 @@
+## 1.0.1
+ October 24, 2019
+- Release as a major semantic version number
+- Remove scoped_model: ^1.0.0 
+
 ## 1.0.0
  October 22, 2019
 - Release as 1.0.0 in semantic version number

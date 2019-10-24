@@ -23,6 +23,8 @@
 
 export 'package:mvc_application/view.dart';
 
+export 'package:i10n_translator/i10n.dart';
+
 export 'package:shrine_mvc/src/app/view/app.dart';
 
 export 'package:shrine_mvc/src/app/view/login.dart';

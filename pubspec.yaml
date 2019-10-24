@@ -1,7 +1,7 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 0.6.0
+version: 1.0.1
 
 environment:
   sdk: ">=2.3.0 <3.0.0"
@@ -19,8 +19,12 @@ dependencies:
 
 #  flutter_i18n: ^0.7.0
 
-# https://pub.dev/packages/scoped_model
-  scoped_model: ^1.0.0
+# https://pub.dev/packages/i10n_translator
+  i10n_translator: ^1.0.0
+ #     path: ../../packages/i10n_translator
+
+#  # https://pub.dev/packages/scoped_model
+#  scoped_model: ^1.0.0
 
 # https://pub.dev/packages/path_provider
   path_provider: ^1.0.0

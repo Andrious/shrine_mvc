@@ -20,13 +20,13 @@ import 'package:flutter/services.dart' show SystemNavigator;
 
 import 'package:meta/meta.dart' show required;
 
-import 'package:scoped_model/scoped_model.dart';
+// import 'package:scoped_model/scoped_model.dart';
 
 import 'package:shrine_mvc/src/model.dart'
     show AppStateModel, Product, ShoppingCartPage;
 
 import 'package:shrine_mvc/src/view.dart'
-    show App, Controllers, SetState, ViewMVC, kShrinePink50;
+    show App, SetState, ViewMVC, kShrinePink50;
 
 // These curves define the emphasized easing curve.
 const Cubic _kAccelerateCurve = Cubic(0.548, 0.0, 0.757, 0.464);

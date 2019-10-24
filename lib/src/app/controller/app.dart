@@ -30,7 +30,7 @@ import 'package:shrine_mvc/src/view.dart' show I10n;
 class ShrineApp extends AppController {
   @override
   initApp() {
-    I10n.init();
+    I10n.init(); //  I10n.init(map: i10nWords);  // Try the map object instead!
   }
 }
 

@@ -14,7 +14,7 @@
 
 import 'package:flutter/material.dart';
 
-import 'package:scoped_model/scoped_model.dart';
+// import 'package:scoped_model/scoped_model.dart';
 
 import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I10n;
 

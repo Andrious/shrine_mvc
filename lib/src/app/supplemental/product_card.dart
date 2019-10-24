@@ -16,7 +16,7 @@ import 'package:flutter/material.dart';
 
 import 'package:intl/intl.dart' show NumberFormat;
 
-import 'package:scoped_model/scoped_model.dart';
+// import 'package:scoped_model/scoped_model.dart';
 
 import 'package:shrine_mvc/src/view.dart' show SetState;
 
