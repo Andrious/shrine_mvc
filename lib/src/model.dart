@@ -29,8 +29,4 @@ export 'package:shrine_mvc/src/home/model/shopping_cart.dart';
 
 export 'package:shrine_mvc/src/home/model/products_repository.dart';
 
-export 'package:shrine_mvc/src/home/model/i10n_words.dart';
-
-export 'package:i10n_translator/i10n.dart';
-
-
+export 'package:shrine_mvc/src/home/model/L10n_words.dart';

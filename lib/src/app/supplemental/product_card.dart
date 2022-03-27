@@ -22,14 +22,28 @@ import 'package:shrine_mvc/src/view.dart' show SetState;
 
 import 'package:shrine_mvc/src/model.dart' show AppStateModel, Product;
 
+///
 class ProductCard extends StatelessWidget {
-  const ProductCard({this.imageAspectRatio = 33 / 49, this.product})
-      : assert(imageAspectRatio == null || imageAspectRatio > 0);
+  ///
+  const ProductCard({
+    Key? key,
+    this.imageAspectRatio = 33 / 49,
+    required this.product,
+    this.isOnWeb = false,
+  })  : assert(imageAspectRatio == null || imageAspectRatio > 0),
+        super(key: key);
 
-  final double imageAspectRatio;
+  ///
+  final double? imageAspectRatio;
+
+  ///
   final Product product;
 
-  static const double kTextBoxHeight = 65.0;
+  ///
+  static const double kTextBoxHeight = 65;
+
+  ///
+  final bool? isOnWeb;
 
   @override
   Widget build(BuildContext context) {
@@ -41,8 +55,8 @@ class ProductCard extends StatelessWidget {
     final ThemeData theme = Theme.of(context);
 
     final Image imageWidget = Image.asset(
-      "assets/${product.assetName}",
-      fit: BoxFit.cover,
+      'assets/${product.assetName}',
+      fit: isOnWeb ?? false ? BoxFit.none : BoxFit.cover,
     );
 //    package: product.assetPackage,
 
@@ -55,32 +69,28 @@ class ProductCard extends StatelessWidget {
                 children: <Widget>[
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget>[
                       AspectRatio(
-                        aspectRatio: imageAspectRatio,
+                        aspectRatio: imageAspectRatio!,
                         child: imageWidget,
                       ),
                       SizedBox(
                         height: kTextBoxHeight *
                             MediaQuery.of(context).textScaleFactor,
-                        width: 121.0,
+                        width: 121,
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: <Widget>[
                             Text(
-                              product == null ? '' : product.name,
+                              product.name,
                               style: theme.textTheme.button,
                               softWrap: false,
                               overflow: TextOverflow.ellipsis,
                               maxLines: 1,
                             ),
-                            const SizedBox(height: 4.0),
+                            const SizedBox(height: 4),
                             Text(
-                              product == null
-                                  ? ''
-                                  : formatter.format(product.price),
+                              formatter.format(product.price),
                               style: theme.textTheme.caption,
                             ),
                           ],
@@ -89,7 +99,7 @@ class ProductCard extends StatelessWidget {
                     ],
                   ),
                   const Padding(
-                    padding: EdgeInsets.all(16.0),
+                    padding: EdgeInsets.all(16),
                     child: Icon(Icons.add_shopping_cart),
                   ),
                 ],

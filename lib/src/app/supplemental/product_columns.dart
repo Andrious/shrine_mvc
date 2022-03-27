@@ -12,26 +12,31 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
-
 import 'package:shrine_mvc/src/model.dart' show Product;
+
+import 'package:shrine_mvc/src/view.dart';
 
 import 'package:shrine_mvc/src/app/supplemental/product_card.dart'
     show ProductCard;
 
+///
 class TwoProductCardColumn extends StatelessWidget {
+  ///
   const TwoProductCardColumn({
-    @required this.bottom,
+    Key? key,
+    required this.bottom,
     this.top,
-  }) : assert(bottom != null);
+  })  : assert(bottom != null),
+        super(key: key);
 
-  final Product bottom, top;
+  ///
+  final Product? bottom, top;
 
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      const double spacerHeight = 44.0;
+      const double spacerHeight = 44;
 
       final double heightOfCards =
           (constraints.biggest.height - spacerHeight) / 2.0;
@@ -47,11 +52,12 @@ class TwoProductCardColumn extends StatelessWidget {
         physics: const ClampingScrollPhysics(),
         children: <Widget>[
           Padding(
-            padding: const EdgeInsetsDirectional.only(start: 28.0),
+            padding: const EdgeInsetsDirectional.only(start: 28),
             child: top != null
                 ? ProductCard(
                     imageAspectRatio: imageAspectRatio,
-                    product: top,
+                    product: top!,
+                    isOnWeb: kIsWeb,
                   )
                 : SizedBox(
                     height: heightOfCards > 0 ? heightOfCards : spacerHeight,
@@ -59,10 +65,10 @@ class TwoProductCardColumn extends StatelessWidget {
           ),
           const SizedBox(height: spacerHeight),
           Padding(
-            padding: const EdgeInsetsDirectional.only(end: 28.0),
+            padding: const EdgeInsetsDirectional.only(end: 28),
             child: ProductCard(
               imageAspectRatio: imageAspectRatio,
-              product: bottom,
+              product: bottom!,
             ),
           ),
         ],
@@ -71,9 +77,13 @@ class TwoProductCardColumn extends StatelessWidget {
   }
 }
 
+///
 class OneProductCardColumn extends StatelessWidget {
-  const OneProductCardColumn({this.product});
+  ///
+  const OneProductCardColumn({Key? key, required this.product})
+      : super(key: key);
 
+  ///
   final Product product;
 
   @override
@@ -83,7 +93,7 @@ class OneProductCardColumn extends StatelessWidget {
       reverse: true,
       children: <Widget>[
         const SizedBox(
-          height: 40.0,
+          height: 40,
         ),
         ProductCard(
           product: product,

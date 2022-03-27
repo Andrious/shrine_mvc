@@ -12,13 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'package:shrine_mvc/src/view.dart';
 
-import 'package:shrine_mvc/src/model.dart' show I10n;
-
-import 'package:shrine_mvc/src/view.dart' show kShrineBrown900;
-
+///
 class LoginPage extends StatefulWidget {
+  ///
+  const LoginPage({Key? key}) : super(key: key);
+
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -31,9 +31,9 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0.0,
+        elevation: 0,
         backgroundColor: Colors.white,
-        brightness: Brightness.light,
+//        brightness: Brightness.light,
         leading: IconButton(
           icon: const BackButtonIcon(),
           tooltip: MaterialLocalizations.of(context).backButtonTooltip,
@@ -47,36 +47,36 @@ class _LoginPageState extends State<LoginPage> {
       ),
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
+          padding: const EdgeInsets.symmetric(horizontal: 24),
           children: <Widget>[
-            const SizedBox(height: 80.0),
+            const SizedBox(height: 80),
             Column(
               children: <Widget>[
                 Image.asset('assets/diamond.png'),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 16),
                 Text(
-                  I10n.s('SHRINE'),
-                  style: Theme.of(context).textTheme.headline,
+                  'SHRINE'.tr,
+                  style: Theme.of(context).textTheme.headline1,
                 ),
               ],
             ),
-            const SizedBox(height: 120.0),
+            const SizedBox(height: 120),
             PrimaryColorOverride(
               color: kShrineBrown900,
               child: TextField(
                 controller: _usernameController,
                 decoration: InputDecoration(
-                  labelText: I10n.s('Username'),
+                  labelText: 'Username'.tr,
                 ),
               ),
             ),
-            const SizedBox(height: 12.0),
+            const SizedBox(height: 12),
             PrimaryColorOverride(
               color: kShrineBrown900,
               child: TextField(
                 controller: _passwordController,
                 decoration: InputDecoration(
-                  labelText: I10n.s('Password'),
+                  labelText: 'Password'.tr,
                 ),
               ),
             ),
@@ -84,11 +84,11 @@ class _LoginPageState extends State<LoginPage> {
               children: <Widget>[
                 ButtonBar(
                   children: <Widget>[
-                    FlatButton(
-                      child: I10n.t('Cancel'),
-                      shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      ),
+                    ElevatedButton(
+                      child: Text('Cancel'.tr),
+                      // shape: const BeveledRectangleBorder(
+                      //   borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                      // ),
                       onPressed: () {
                         // The login screen is immediately displayed on top of
                         // the Shrine home screen using onGenerateRoute and so
@@ -97,12 +97,12 @@ class _LoginPageState extends State<LoginPage> {
                         Navigator.of(context, rootNavigator: true).pop();
                       },
                     ),
-                    RaisedButton(
-                      child: I10n.t('Next'),
-                      elevation: 8.0,
-                      shape: const BeveledRectangleBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      ),
+                    ElevatedButton(
+                      child: Text('Next'.tr),
+                      // elevation: 8.0,
+                      // shape: const BeveledRectangleBorder(
+                      //   borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                      // ),
                       onPressed: () {
                         Navigator.pop(context);
                       },
@@ -118,18 +118,24 @@ class _LoginPageState extends State<LoginPage> {
   }
 }
 
+///
 class PrimaryColorOverride extends StatelessWidget {
-  const PrimaryColorOverride({Key key, this.color, this.child})
+  ///
+  const PrimaryColorOverride(
+      {Key? key, required this.color, required this.child})
       : super(key: key);
 
+  ///
   final Color color;
+
+  ///
   final Widget child;
 
   @override
   Widget build(BuildContext context) {
     return Theme(
-      child: child,
       data: Theme.of(context).copyWith(primaryColor: color),
+      child: child,
     );
   }
 }

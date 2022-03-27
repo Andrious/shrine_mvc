@@ -1,12 +1,27 @@
-import 'package:flutter/material.dart' show runApp;
+import 'package:shrine_mvc/src/view.dart';
 
-import 'package:shrine_mvc/src/view.dart' show App, ShrineApp;
+void main() {
+//  MyApp? app;
+//   return runApp(
+//     DevicePreview(
+//       builder: (context) => app ??= MyApp(),
+//       enabled: kIsWeb,
+// //      isToolbarVisible: false,
+//       devices: Devices.all,
+//       storage: DevicePreviewStorage.none(),
+//     ),
+//   );
+  // @override  <---- in app.dart and in view.dart
+  // c.TransitionBuilder? onBuilder() => kIsWeb ? DevicePreview.appBuilder : null;
 
-//void main() => runApp(ShrineApp());
+  return runApp(MyApp());
+}
 
-void main() => runApp(MyApp());
+///
+class MyApp extends AppStatefulWidget {
+  ///
+  MyApp({Key? key}) : super(key: key);
 
-class MyApp extends App {
   @override
-  createView() => ShrineApp();
+  AppState createAppState() => ShrineApp();
 }

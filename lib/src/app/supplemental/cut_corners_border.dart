@@ -28,23 +28,12 @@ import 'package:flutter/material.dart'
         ShapeBorder,
         TextDirection;
 
-import 'package:flutter/widgets.dart'
-    show
-        BorderRadius,
-        BorderSide,
-        Canvas,
-        Paint,
-        Path,
-        RRect,
-        Radius,
-        Rect,
-        ShapeBorder,
-        TextDirection;
-
+///
 class CutCornersBorder extends OutlineInputBorder {
+  ///
   const CutCornersBorder({
     BorderSide borderSide = BorderSide.none,
-    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(2.0)),
+    BorderRadius borderRadius = const BorderRadius.all(Radius.circular(2)),
     this.cut = 7.0,
     double gapPadding = 2.0,
   }) : super(
@@ -54,28 +43,28 @@ class CutCornersBorder extends OutlineInputBorder {
         );
 
   @override
-  CutCornersBorder copyWith({
-    BorderSide borderSide,
-    BorderRadius borderRadius,
-    double gapPadding,
-    double cut,
+  OutlineInputBorder copyWith({
+    BorderRadius? borderRadius,
+    BorderSide? borderSide,
+    double? gapPadding,
   }) {
     return CutCornersBorder(
       borderSide: borderSide ?? this.borderSide,
       borderRadius: borderRadius ?? this.borderRadius,
       gapPadding: gapPadding ?? this.gapPadding,
-      cut: cut ?? this.cut,
+      cut: cut,
     );
   }
 
+  ///
   final double cut;
 
   @override
-  ShapeBorder lerpFrom(ShapeBorder a, double t) {
+  ShapeBorder? lerpFrom(ShapeBorder? a, double t) {
     if (a is CutCornersBorder) {
       final CutCornersBorder outline = a;
       return CutCornersBorder(
-        borderRadius: BorderRadius.lerp(outline.borderRadius, borderRadius, t),
+        borderRadius: BorderRadius.lerp(outline.borderRadius, borderRadius, t)!,
         borderSide: BorderSide.lerp(outline.borderSide, borderSide, t),
         cut: cut,
         gapPadding: outline.gapPadding,
@@ -85,11 +74,11 @@ class CutCornersBorder extends OutlineInputBorder {
   }
 
   @override
-  ShapeBorder lerpTo(ShapeBorder b, double t) {
+  ShapeBorder? lerpTo(ShapeBorder? b, double t) {
     if (b is CutCornersBorder) {
       final CutCornersBorder outline = b;
       return CutCornersBorder(
-        borderRadius: BorderRadius.lerp(borderRadius, outline.borderRadius, t),
+        borderRadius: BorderRadius.lerp(borderRadius, outline.borderRadius, t)!,
         borderSide: BorderSide.lerp(borderSide, outline.borderSide, t),
         cut: cut,
         gapPadding: outline.gapPadding,
@@ -104,7 +93,9 @@ class CutCornersBorder extends OutlineInputBorder {
     if (start > 0.0 || extent > 0.0) {
       path.relativeMoveTo(extent + start, center.top);
       _notchedSidesAndBottom(center, path);
-      path..lineTo(center.left + cut, center.top)..lineTo(start, center.top);
+      path
+        ..lineTo(center.left + cut, center.top)
+        ..lineTo(start, center.top);
     } else {
       path.moveTo(center.left + cut, center.top);
       _notchedSidesAndBottom(center, path);
@@ -128,12 +119,13 @@ class CutCornersBorder extends OutlineInputBorder {
   void paint(
     Canvas canvas,
     Rect rect, {
-    double gapStart,
-    double gapExtent = 0.0,
-    double gapPercentage = 0.0,
-    TextDirection textDirection,
+    double? gapExtent = 0.0,
+    double? gapPercentage = 0.0,
+    double? gapStart,
+    TextDirection? textDirection,
   }) {
-    assert(gapExtent != null);
+    gapExtent = gapExtent ?? 0.0;
+    gapPercentage = gapPercentage ?? 0.0;
     assert(gapPercentage >= 0.0 && gapPercentage <= 1.0);
 
     final Paint paint = borderSide.toPaint();
@@ -142,7 +134,7 @@ class CutCornersBorder extends OutlineInputBorder {
       canvas.drawPath(_notchedCornerPath(outer.middleRect), paint);
     } else {
       final double extent =
-          lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage);
+          lerpDouble(0.0, gapExtent + gapPadding * 2.0, gapPercentage) ?? 0;
       switch (textDirection) {
         case TextDirection.rtl:
           {
@@ -158,6 +150,7 @@ class CutCornersBorder extends OutlineInputBorder {
             canvas.drawPath(path, paint);
             break;
           }
+        default:
       }
     }
   }

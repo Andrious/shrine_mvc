@@ -20,27 +20,27 @@
 ///          Created  17 Aug 2019
 ///
 ///
-
 export 'package:mvc_application/view.dart';
-
-export 'package:i10n_translator/i10n.dart';
-
-export 'package:shrine_mvc/src/app/view/app.dart';
-
-export 'package:shrine_mvc/src/app/view/login.dart';
-
-export 'package:shrine_mvc/src/app/view/colors.dart';
-
-export 'package:shrine_mvc/src/app/supplemental/cut_corners_border.dart';
-
-export 'package:shrine_mvc/src/home/view/home.dart';
-
-export 'package:shrine_mvc/src/home/view/backdrop.dart';
-
-export 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
-
-export 'package:shrine_mvc/src/home/view/category_menu_page.dart';
 
 export 'package:shrine_mvc/src/app/supplemental/asymmetric_view.dart';
 
+export 'package:shrine_mvc/src/app/supplemental/cut_corners_border.dart';
 
+// export 'package:device_preview/device_preview.dart'
+//     hide basicLocaleListResolution;
+
+export 'package:shrine_mvc/src/app/view/app.dart';
+
+export 'package:shrine_mvc/src/app/view/colors.dart';
+
+export 'package:shrine_mvc/src/app/view/login.dart';
+
+export 'package:shrine_mvc/src/home/view/backdrop.dart';
+
+export 'package:shrine_mvc/src/home/view/category_menu_page.dart';
+
+export 'package:shrine_mvc/src/home/view/expanding_bottom_sheet.dart';
+
+export 'package:shrine_mvc/src/home/view/home.dart';
+
+export 'package:shrine_mvc/src/home/view/products.dart';

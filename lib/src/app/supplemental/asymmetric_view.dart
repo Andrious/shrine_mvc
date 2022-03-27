@@ -12,22 +12,29 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
+import 'dart:ui' show PointerDeviceKind;
+
+import 'package:shrine_mvc/src/view.dart';
 
 import 'package:shrine_mvc/src/model.dart' show Product;
 
 import 'package:shrine_mvc/src/app/supplemental/product_columns.dart'
     show OneProductCardColumn, TwoProductCardColumn;
 
+///
 class AsymmetricView extends StatelessWidget {
-  const AsymmetricView({Key key, this.products}) : super(key: key);
+  ///
+  const AsymmetricView({Key? key, this.products}) : super(key: key);
 
-  final List<Product> products;
+  ///
+  final List<Product>? products;
 
   List<Container> _buildColumns(BuildContext context) {
-    if (products == null || products.isEmpty) {
+    if (products == null || products!.isEmpty) {
       return const <Container>[];
     }
+
+    final List<Product> _products = products!;
 
     // This will return a list of columns. It will oscillate between the two
     // kinds of columns. Even cases of the index (0, 2, 4, etc) will be
@@ -37,7 +44,7 @@ class AsymmetricView extends StatelessWidget {
     // some kinda awkward math so we use _evenCasesIndex and _oddCasesIndex as
     // helpers for creating the index of the product list that will correspond
     // to the index of the list of columns.
-    return List<Container>.generate(_listItemCount(products.length),
+    return List<Container>.generate(_listItemCount(_products.length),
         (int index) {
       double width = .59 * MediaQuery.of(context).size.width;
       Widget column;
@@ -45,20 +52,21 @@ class AsymmetricView extends StatelessWidget {
         /// Even cases
         final int bottom = _evenCasesIndex(index);
         column = TwoProductCardColumn(
-          bottom: products[bottom],
-          top: products.length - 1 >= bottom + 1 ? products[bottom + 1] : null,
+          bottom: _products[bottom],
+          top:
+              _products.length - 1 >= bottom + 1 ? _products[bottom + 1] : null,
         );
         width += 32.0;
       } else {
         /// Odd cases
         column = OneProductCardColumn(
-          product: products[_oddCasesIndex(index)],
+          product: _products[_oddCasesIndex(index)],
         );
       }
       return Container(
         width: width,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          padding: const EdgeInsets.symmetric(horizontal: 16),
           child: column,
         ),
       );
@@ -86,11 +94,25 @@ class AsymmetricView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      scrollDirection: Axis.horizontal,
-      padding: const EdgeInsets.fromLTRB(0.0, 34.0, 16.0, 44.0),
-      children: _buildColumns(context),
-      physics: const AlwaysScrollableScrollPhysics(),
+    return ScrollConfiguration(
+      behavior: _BrowserScrollBehavior(),
+      child: ListView(
+        scrollDirection: Axis.horizontal,
+        padding: kIsWeb ? null : const EdgeInsets.fromLTRB(0, 34, 16, 44),
+        physics: const AlwaysScrollableScrollPhysics(),
+        children: _buildColumns(context),
+      ),
     );
   }
+}
+
+class _BrowserScrollBehavior extends MaterialScrollBehavior {
+  // Override behavior methods and getters like dragDevices
+  @override
+  Set<PointerDeviceKind> get dragDevices => !kIsWeb
+      ? super.dragDevices
+      : {
+          PointerDeviceKind.touch,
+          PointerDeviceKind.mouse,
+        };
 }

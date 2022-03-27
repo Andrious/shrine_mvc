@@ -1,41 +1,37 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 1.0.1
+version: 2.0.0
 
 environment:
-  sdk: ">=2.3.0 <3.0.0"
+  sdk: ">=2.16.1 <3.0.0"
 
 dependencies:
+
+  # The following adds the Cupertino Icons font to your application.
+  # Use with the CupertinoIcons class for iOS style icons.
+  # https://pub.dev/packages/cupertino_icons
+  cupertino_icons: ^1.0.4
+
+#  # https://github.com/aloisdeniel/flutter_device_preview
+#  device_preview:
+#    path: ../../apps/flutter_device_preview/device_preview  # Eventually move to Lib, right?
+
   flutter:
+    sdk: flutter
+
+  flutter_localizations:
     sdk: flutter
 
 ## https://pub.dev/packages/flutter_cupertino_localizations
 #  flutter_cupertino_localizations: ^1.0.0
 
 # https://pub.dev/packages/mvc_application
-  mvc_application: ^1.0.0
+  mvc_application: ^8.0.0
 #    path: ../../packages/mvc_application
 
-#  flutter_i18n: ^0.7.0
-
-# https://pub.dev/packages/i10n_translator
-  i10n_translator: ^1.0.0
- #     path: ../../packages/i10n_translator
-
-#  # https://pub.dev/packages/scoped_model
-#  scoped_model: ^1.0.0
-
 # https://pub.dev/packages/path_provider
-  path_provider: ^1.0.0
-
-  # The following adds the Cupertino Icons font to your application.
-  # Use with the CupertinoIcons class for iOS style icons.
-# https://pub.dev/packages/cupertino_icons
-  cupertino_icons: ^0.1.0
-
-  flutter_localizations:
-    sdk: flutter
+  path_provider: ^2.0.9
 
 dev_dependencies:
   flutter_test:

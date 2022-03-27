@@ -26,12 +26,15 @@ import 'package:shrine_mvc/src/view.dart'
         SetState,
         kShrineBrown600,
         kShrineBrown900,
-        kShrinePink100,
         kShrinePink50;
 
-const double _leftColumnWidth = 60.0;
+const double _leftColumnWidth = 60;
 
+///
 class ShoppingCartPage extends StatefulWidget {
+  ///
+  const ShoppingCartPage({Key? key}) : super(key: key);
+
   @override
   _ShoppingCartPageState createState() => _ShoppingCartPageState();
 }
@@ -45,7 +48,7 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
         .map(
           (int id) => ShoppingCartRow(
             product: AppStateModel().getProductById(id),
-            quantity: AppStateModel().productsInCart[id],
+            quantity: AppStateModel().productsInCart[id]!,
             onPressed: () {
               AppStateModel().removeItemFromCart(id);
             },
@@ -61,134 +64,78 @@ class _ShoppingCartPageState extends State<ShoppingCartPage> {
     return Scaffold(
       backgroundColor: kShrinePink50,
       body: SafeArea(
-        child: Container(
-          child: SetState(
-              builder: (context, anItem) => Stack(
-                    children: <Widget>[
-                      ListView(
-                        children: <Widget>[
-                          Row(
-                            children: <Widget>[
-                              SizedBox(
-                                width: _leftColumnWidth,
-                                child: IconButton(
-                                  icon: const Icon(Icons.keyboard_arrow_down),
-                                  onPressed: () =>
-                                      ExpandingBottomSheet.of(context).close(),
-                                ),
+        child: SetState(
+            builder: (context, anItem) => Stack(
+                  children: <Widget>[
+                    ListView(
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            SizedBox(
+                              width: _leftColumnWidth,
+                              child: IconButton(
+                                icon: const Icon(Icons.keyboard_arrow_down),
+                                onPressed: () =>
+                                    ExpandingBottomSheet.of(context).close(),
                               ),
-                              Text(
-                                'CART',
-                                style: localTheme.textTheme.subhead
-                                    .copyWith(fontWeight: FontWeight.w600),
-                              ),
-                              const SizedBox(width: 16.0),
-                              Text(
-                                  '${AppStateModel().totalCartQuantity} ITEMS'),
-                            ],
-                          ),
-                          const SizedBox(height: 16.0),
-                          Column(
-                            children: _createShoppingCartRows(), //model),
-                          ),
-                          ShoppingCartSummary(), //model: model),
-                          const SizedBox(height: 100.0),
-                        ],
-                      ),
-                      Positioned(
-                        bottom: 16.0,
-                        left: 16.0,
-                        right: 16.0,
-                        child: RaisedButton(
-                          shape: const BeveledRectangleBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(7.0)),
-                          ),
-                          color: kShrinePink100,
-                          splashColor: kShrineBrown600,
-                          child: const Padding(
-                            padding: EdgeInsets.symmetric(vertical: 12.0),
-                            child: Text('CLEAR CART'),
-                          ),
-                          onPressed: () {
-                            AppStateModel().clearCart();
-                            ExpandingBottomSheet.of(context).close();
-                          },
+                            ),
+                            Text(
+                              'CART',
+                              style: localTheme.textTheme.subtitle1!
+                                  .copyWith(fontWeight: FontWeight.w600),
+                            ),
+                            const SizedBox(width: 16),
+                            Text('${AppStateModel().totalCartQuantity} ITEMS'),
+                          ],
                         ),
+                        const SizedBox(height: 16),
+                        Column(
+                          children: _createShoppingCartRows(), //model),
+                        ),
+                        const ShoppingCartSummary(), //model: model),
+                        const SizedBox(height: 100),
+                      ],
+                    ),
+                    Positioned(
+                      bottom: 16,
+                      left: 16,
+                      right: 16,
+                      child: ElevatedButton(
+                        // shape: const BeveledRectangleBorder(
+                        //   borderRadius:
+                        //       BorderRadius.all(Radius.circular(7.0)),
+                        // ),
+                        // color: kShrinePink100,
+                        // splashColor: kShrineBrown600,
+                        child: const Padding(
+                          padding: EdgeInsets.symmetric(vertical: 12),
+                          child: Text('CLEAR CART'),
+                        ),
+                        onPressed: () {
+                          AppStateModel().clearCart();
+                          ExpandingBottomSheet.of(context).close();
+                        },
                       ),
-                    ],
-                  )),
-//          child: ScopedModelDescendant<AppStateModel>(
-//            builder: (BuildContext context, Widget child, AppStateModel model) {
-//              return Stack(
-//                children: <Widget>[
-//                  ListView(
-//                    children: <Widget>[
-//                      Row(
-//                        children: <Widget>[
-//                          SizedBox(
-//                            width: _leftColumnWidth,
-//                            child: IconButton(
-//                              icon: const Icon(Icons.keyboard_arrow_down),
-//                              onPressed: () => ExpandingBottomSheet.of(context).close(),
-//                            ),
-//                          ),
-//                          Text(
-//                            'CART',
-//                            style: localTheme.textTheme.subhead.copyWith(fontWeight: FontWeight.w600),
-//                          ),
-//                          const SizedBox(width: 16.0),
-//                          Text('${model.totalCartQuantity} ITEMS'),
-//                        ],
-//                      ),
-//                      const SizedBox(height: 16.0),
-//                      Column(
-//                        children: _createShoppingCartRows(model),
-//                      ),
-//                      ShoppingCartSummary(model: model),
-//                      const SizedBox(height: 100.0),
-//                    ],
-//                  ),
-//                  Positioned(
-//                    bottom: 16.0,
-//                    left: 16.0,
-//                    right: 16.0,
-//                    child: RaisedButton(
-//                      shape: const BeveledRectangleBorder(
-//                        borderRadius: BorderRadius.all(Radius.circular(7.0)),
-//                      ),
-//                      color: kShrinePink100,
-//                      splashColor: kShrineBrown600,
-//                      child: const Padding(
-//                        padding: EdgeInsets.symmetric(vertical: 12.0),
-//                        child: Text('CLEAR CART'),
-//                      ),
-//                      onPressed: () {
-//                        model.clearCart();
-//                        ExpandingBottomSheet.of(context).close();
-//                      },
-//                    ),
-//                  ),
-//                ],
-//              );
-//            },
-//          ),
-        ),
+                    ),
+                  ],
+                )),
       ),
     );
   }
 }
 
+///
 class ShoppingCartSummary extends StatelessWidget {
-  const ShoppingCartSummary(); //{this.model});
+  ///
+  const ShoppingCartSummary({Key? key}) : super(key: key); //{this.model});
 
 //  final AppStateModel model;
 
   @override
   Widget build(BuildContext context) {
     final TextStyle smallAmountStyle =
-        Theme.of(context).textTheme.body1.copyWith(color: kShrineBrown600);
-    final TextStyle largeAmountStyle = Theme.of(context).textTheme.display1;
+        Theme.of(context).textTheme.bodyText1!.copyWith(color: kShrineBrown600);
+    final TextStyle? largeAmountStyle = Theme.of(context).textTheme.headline4;
     final NumberFormat formatter = NumberFormat.simpleCurrency(
       decimalDigits: 2,
       locale: Localizations.localeOf(context).toString(),
@@ -199,11 +146,10 @@ class ShoppingCartSummary extends StatelessWidget {
         const SizedBox(width: _leftColumnWidth),
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.only(right: 16.0),
+            padding: const EdgeInsets.only(right: 16),
             child: Column(
               children: <Widget>[
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
                     const Expanded(
                       child: Text('TOTAL'),
@@ -214,7 +160,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 16.0),
+                const SizedBox(height: 16),
                 Row(
                   children: <Widget>[
                     const Expanded(
@@ -226,7 +172,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 4),
                 Row(
                   children: <Widget>[
                     const Expanded(
@@ -238,7 +184,7 @@ class ShoppingCartSummary extends StatelessWidget {
                     ),
                   ],
                 ),
-                const SizedBox(height: 4.0),
+                const SizedBox(height: 4),
                 Row(
                   children: <Widget>[
                     const Expanded(
@@ -259,15 +205,23 @@ class ShoppingCartSummary extends StatelessWidget {
   }
 }
 
+///
 class ShoppingCartRow extends StatelessWidget {
+  ///
   const ShoppingCartRow({
-    @required this.product,
-    @required this.quantity,
-    this.onPressed,
-  });
+    Key? key,
+    required this.product,
+    required this.quantity,
+    required this.onPressed,
+  }) : super(key: key);
 
+  ///
   final Product product;
+
+  ///
   final int quantity;
+
+  ///
   final VoidCallback onPressed;
 
   @override
@@ -279,7 +233,7 @@ class ShoppingCartRow extends StatelessWidget {
     final ThemeData localTheme = Theme.of(context);
 
     return Padding(
-      padding: const EdgeInsets.only(bottom: 16.0),
+      padding: const EdgeInsets.only(bottom: 16),
       child: Row(
         key: ValueKey<int>(product.id),
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -293,20 +247,20 @@ class ShoppingCartRow extends StatelessWidget {
           ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: const EdgeInsets.only(right: 16),
               child: Column(
                 children: <Widget>[
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Image.asset(
-                        "assets/${product.assetName}",
+                        'assets/${product.assetName}',
 //                        package: product.assetPackage,
                         fit: BoxFit.cover,
-                        width: 75.0,
-                        height: 75.0,
+                        width: 75,
+                        height: 75,
                       ),
-                      const SizedBox(width: 16.0),
+                      const SizedBox(width: 16),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -321,7 +275,7 @@ class ShoppingCartRow extends StatelessWidget {
                             ),
                             Text(
                               product.name,
-                              style: localTheme.textTheme.subhead
+                              style: localTheme.textTheme.subtitle1!
                                   .copyWith(fontWeight: FontWeight.w600),
                             ),
                           ],
@@ -329,10 +283,10 @@ class ShoppingCartRow extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 16.0),
+                  const SizedBox(height: 16),
                   const Divider(
                     color: kShrineBrown900,
-                    height: 10.0,
+                    height: 10,
                   ),
                 ],
               ),

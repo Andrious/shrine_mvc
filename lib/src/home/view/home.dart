@@ -12,61 +12,43 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:flutter/material.dart';
-
-// import 'package:scoped_model/scoped_model.dart';
-
-import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category, I10n;
-
-import 'package:shrine_mvc/src/view.dart'
-    show
-        AsymmetricView,
-        Backdrop,
-        CategoryMenuPage,
-        ExpandingBottomSheet,
-        SetState,
-        ShrineApp;
 import 'package:shrine_mvc/src/view.dart';
 
-class ProductPage extends StatelessWidget {
-  const ProductPage({this.category = Category.all});
-
-  final Category category;
-
-  @override
-  Widget build(BuildContext context) {
-    AppStateModel().loadProducts();
-    return AsymmetricView(products: AppStateModel().getProducts());
-  }
-}
-
+///
 class HomePage extends StatelessWidget {
+  ///
   const HomePage({
     this.expandingBottomSheet,
     this.backdrop,
-    Key key,
+    Key? key,
   }) : super(key: key);
 
-  final ExpandingBottomSheet expandingBottomSheet;
-  final Backdrop backdrop;
+  ///
+  final ExpandingBottomSheet? expandingBottomSheet;
+
+  ///
+  final Backdrop? backdrop;
 
   @override
   Widget build(BuildContext context) {
-    Widget child = expandingBottomSheet ??
-        ExpandingBottomSheet(hideController: ShrineApp.aniController);
-
     return SetState(builder: (context, _) {
+      final Widget child = expandingBottomSheet ??
+          ExpandingBottomSheet(hideController: ShrineApp.aniController);
       return Stack(
         children: <Widget>[
           Backdrop(
-            frontLayer: ProductPage(),
+            frontLayer: const ProductPage(),
             backLayer: CategoryMenuPage(
-                onCategoryTap: () => ShrineApp.aniController.forward()),
-            frontTitle: I10n.t('Shrine'),
-            backTitle: I10n.t('Menu'),
+              onCategoryTap: () => ShrineApp.aniController.forward(),
+            ),
+            frontTitle: L10n.t('Shrine'),
+            backTitle: L10n.t('Menu'),
             controller: ShrineApp.aniController,
           ),
-          Align(child: child, alignment: Alignment.bottomRight),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: child,
+          ),
         ],
       );
     });

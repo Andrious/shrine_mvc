@@ -1,81 +1,44 @@
-///
-/// Copyright (C) 2019 Andrious Solutions
-///
-/// This program is free software; you can redistribute it and/or
-/// modify it under the terms of the GNU General Public License
-/// as published by the Free Software Foundation; either version 3
-/// of the License, or any later version.
-///
-/// You may obtain a copy of the License at
-///
-///  http://www.apache.org/licenses/LICENSE-2.0
-///
-///
-/// Unless required by applicable law or agreed to in writing, software
-/// distributed under the License is distributed on an "AS IS" BASIS,
-/// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-/// See the License for the specific language governing permissions and
-/// limitations under the License.
-///
-///          Created  17 Aug 2019
-///
-///
-
-import 'package:flutter/material.dart';
-
-import 'package:flutter_localizations/flutter_localizations.dart'
-    show GlobalCupertinoLocalizations, GlobalMaterialLocalizations, GlobalWidgetsLocalizations;
-
-import 'package:prefs/prefs.dart' show Prefs;
-
-import 'package:shrine_mvc/src/model.dart'
-    show AppStateModel, I10n, I10nDelegate;
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, AppTrs;
 
 import 'package:shrine_mvc/src/controller.dart' as c;
 
-import 'package:shrine_mvc/src/view.dart'
-    show
-        App,
-        AppView,
-        CutCornersBorder,
-        HomePage,
-        LoginPage,
-        kShrineBackgroundWhite,
-        kShrineBrown900,
-        kShrineErrorRed,
-        kShrinePink100,
-        kShrinePink50,
-        kShrineSurfaceWhite;
+import 'package:shrine_mvc/src/view.dart';
 
-class ShrineApp extends AppView with SingleTickerProviderStateMixin {
-  // Controller to coordinate both the opening/closing of backdrop and sliding
-  // of expanding bottom sheet
-  static AnimationController aniController;
-
+///
+class ShrineApp extends AppState with SingleTickerProviderStateMixin {
+  ///
   ShrineApp()
       : super(
           con: c.ShrineApp(),
-          home: HomePage(),
-          onGenerateTitle: (context) => I10n.s('Shrine'),
+          home: const HomePage(),
+          object: AppStateModel(),
+          onGenerateTitle: (context) => 'Shrine'.tr,
+          useInheritedMediaQuery: kIsWeb,
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,
+          localeResolutionCallback: AppTrs.localeResolutionCallback,
+          supportedLocales: AppTrs.supportedLocales,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-            I10nDelegate(),
+            L10n.delegate!,
           ],
         );
+
+  /// Controller to coordinate both the opening/closing of backdrop and sliding
+  /// of expanding bottom sheet
+  static late AnimationController aniController;
 
   @override
   void initState() {
     super.initState();
-    object = AppStateModel();
+
     aniController = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 450),
-      value: 1.0,
+      value: 1,
     );
   }
 
@@ -83,25 +46,29 @@ class ShrineApp extends AppView with SingleTickerProviderStateMixin {
   // toggling from the Gallery options menu.
   @override
   ThemeData onTheme() =>
-      _kShrineTheme.copyWith(platform: Theme.of(App.context).platform);
+      _kShrineTheme.copyWith(platform: Theme.of(App.context!).platform);
 
   @override
   Locale onLocale() {
-    final locale = Prefs.getString('locale', 'en');
-    return Locale(locale);
+    final _locale = Prefs.getString('locale', 'en_US');
+    Locale? locale;
+    if (kIsWeb) {
+//      locale = DevicePreview.locale(context);
+    }
+    return locale ?? L10n.toLocale(_locale)!;
   }
 
-  @override
-  Iterable<Locale> onSupportedLocales() => I10n.supportedLocales;
+  // @override
+  // c.TransitionBuilder? onBuilder() => kIsWeb ? DevicePreview.appBuilder : null;
 }
 
-Route<dynamic> _getRoute(RouteSettings settings) {
+Route<dynamic>? _getRoute(RouteSettings settings) {
   if (settings.name != '/login') {
     return null;
   }
   return MaterialPageRoute<void>(
     settings: settings,
-    builder: (BuildContext context) => LoginPage(),
+    builder: (BuildContext context) => const LoginPage(),
     fullscreenDialog: true,
   );
 }
@@ -125,7 +92,6 @@ ThemeData _buildShrineTheme() {
     errorColor: kShrineErrorRed,
     buttonTheme: const ButtonThemeData(
       colorScheme: kShrineColorScheme,
-      textTheme: ButtonTextTheme.normal,
     ),
     primaryIconTheme: _customIconTheme(base.iconTheme),
     inputDecorationTheme:
@@ -156,13 +122,14 @@ const ColorScheme kShrineColorScheme = ColorScheme(
 TextTheme _buildShrineTextTheme(TextTheme base) {
   return base
       .copyWith(
-        headline: base.headline.copyWith(fontWeight: FontWeight.w500),
-        title: base.title.copyWith(fontSize: 18.0),
+        headline1: base.headline5?.copyWith(fontWeight: FontWeight.w500),
+        subtitle1: base.headline6?.copyWith(fontSize: 18.0),
         caption:
-            base.caption.copyWith(fontWeight: FontWeight.w400, fontSize: 14.0),
-        body2: base.body2.copyWith(fontWeight: FontWeight.w500, fontSize: 16.0),
+            base.caption?.copyWith(fontWeight: FontWeight.w400, fontSize: 14.0),
+        bodyText2: base.bodyText2
+            ?.copyWith(fontWeight: FontWeight.w500, fontSize: 16.0),
         button:
-            base.button.copyWith(fontWeight: FontWeight.w500, fontSize: 14.0),
+            base.button?.copyWith(fontWeight: FontWeight.w500, fontSize: 14.0),
       )
       .apply(
         fontFamily: 'Raleway',

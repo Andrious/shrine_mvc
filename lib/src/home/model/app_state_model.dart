@@ -16,120 +16,122 @@
 
 // import 'package:scoped_model/scoped_model.dart';
 
+import 'package:shrine_mvc/src/view.dart';
+
 import 'package:shrine_mvc/src/model.dart'
     show Category, Product, ProductsRepository;
 
 import 'package:shrine_mvc/src/controller.dart' show ControllerMVC;
 
 double _salesTaxRate = 0.06;
-double _shippingCostPerItem = 7.0;
+double _shippingCostPerItem = 7;
 
+///
 class AppStateModel extends ControllerMVC {
   //} extends Model {
-  factory AppStateModel() {
-    _this ??= AppStateModel._();
-    return _this;
-  }
-  static AppStateModel _this;
-
+  ///
+  factory AppStateModel() => _this ??= AppStateModel._();
   AppStateModel._();
+  static AppStateModel? _this;
 
   // All the available products.
-  List<Product> _availableProducts;
+  List<Product>? _availableProducts;
 
   // The currently selected category of products.
   Category _selectedCategory = Category.all;
 
   // The IDs and quantities of products currently in the cart.
-  final Map<int, int> _productsInCart = <int, int>{};
+  final Map<int, int> _productsInCart = {};
 
+  ///
   Map<int, int> get productsInCart => Map<int, int>.from(_productsInCart);
 
   // Total number of items in the cart.
+  ///
   int get totalCartQuantity =>
       _productsInCart.values.fold(0, (int v, int e) => v + e);
 
+  ///
   Category get selectedCategory => _selectedCategory;
 
-  // Totaled prices of the items in the cart.
+  /// Totaled prices of the items in the cart.
   double get subtotalCost {
     return _productsInCart.keys
-        .map((int id) => _availableProducts[id].price * _productsInCart[id])
-        .fold(0.0, (double sum, int e) => sum + e);
+        .map((int id) => _availableProducts![id].price * _productsInCart[id]!)
+        .fold(0, (double sum, int e) => sum + e);
   }
 
-  // Total shipping cost for the items in the cart.
+  /// Total shipping cost for the items in the cart.
   double get shippingCost {
     return _shippingCostPerItem *
         _productsInCart.values.fold(0.0, (num sum, int e) => sum + e);
   }
 
-  // Sales tax for the items in the cart
+  /// Sales tax for the items in the cart
   double get tax => subtotalCost * _salesTaxRate;
 
-  // Total cost to order everything in the cart.
+  /// Total cost to order everything in the cart.
   double get totalCost => subtotalCost + shippingCost + tax;
 
-  // Returns a copy of the list of available products, filtered by category.
+  /// Returns a copy of the list of available products, filtered by category.
   List<Product> getProducts() {
     if (_availableProducts == null) {
       return <Product>[];
     }
 
     if (_selectedCategory == Category.all) {
-      return List<Product>.from(_availableProducts);
+      return List<Product>.from(_availableProducts!);
     } else {
-      return _availableProducts
+      return _availableProducts!
           .where((Product p) => p.category == _selectedCategory)
           .toList();
     }
   }
 
-  // Adds a product to the cart.
+  /// Adds a product to the cart.
   void addProductToCart(int productId) {
     if (!_productsInCart.containsKey(productId)) {
       _productsInCart[productId] = 1;
     } else {
-      _productsInCart[productId]++;
+      int count = _productsInCart[productId]!;
+      _productsInCart[productId] = count++;
     }
-//    notifyListeners();
-    refresh();
+    App.refresh();
   }
 
-  // Removes an item from the cart.
+  /// Removes an item from the cart.
   void removeItemFromCart(int productId) {
     if (_productsInCart.containsKey(productId)) {
       if (_productsInCart[productId] == 1) {
         _productsInCart.remove(productId);
       } else {
-        _productsInCart[productId]--;
+        int product = _productsInCart[productId]!;
+        _productsInCart[productId] = product--;
       }
     }
-//    notifyListeners();
-    refresh();
+    App.refresh();
   }
 
-  // Returns the Product instance matching the provided id.
+  /// Returns the Product instance matching the provided id.
   Product getProductById(int id) {
-    return _availableProducts.firstWhere((Product p) => p.id == id);
+    return _availableProducts!.firstWhere((Product p) => p.id == id);
   }
 
-  // Removes everything from the cart.
+  /// Removes everything from the cart.
   void clearCart() {
     _productsInCart.clear();
-//    notifyListeners();
-    refresh();
+    App.refresh();
   }
 
-  // Loads the list of available products from the repo.
+  /// Loads the list of available products from the repo.
   void loadProducts() {
     _availableProducts = ProductsRepository.loadProducts(Category.all);
-//    notifyListeners();
   }
 
+  ///
+  //ignore: use_setters_to_change_properties
   void setCategory(Category newCategory) {
     _selectedCategory = newCategory;
-//    notifyListeners();
   }
 
   @override

@@ -21,13 +21,15 @@ enum Category {
   home,
 }
 
+///
 class Product {
+  ///
   const Product({
-    @required this.category,
-    @required this.id,
-    @required this.isFeatured,
-    @required this.name,
-    @required this.price,
+    required this.category,
+    required this.id,
+    required this.isFeatured,
+    required this.name,
+    required this.price,
   })  : assert(category != null),
         assert(id != null),
         assert(isFeatured != null),

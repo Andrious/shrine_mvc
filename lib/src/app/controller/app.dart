@@ -21,17 +21,11 @@
 ///
 ///
 
-import 'package:shrine_mvc/src/model.dart' show i10nWords;
+import 'package:shrine_mvc/src/model.dart' show AppTranslations;
 
 import 'package:shrine_mvc/src/controller.dart' show AppController;
 
-import 'package:shrine_mvc/src/view.dart' show I10n;
+import 'package:shrine_mvc/src/view.dart';
 
-class ShrineApp extends AppController {
-  @override
-  initApp() {
-    I10n.init(); //  I10n.init(map: i10nWords);  // Try the map object instead!
-  }
-}
-
-
+///
+class ShrineApp extends AppController {}
