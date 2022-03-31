@@ -335,13 +335,9 @@ class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
   Widget _buildCart(BuildContext context, Widget? child) {
     // numProducts is the number of different products in the cart (does not
     // include multiples of the same product).
-//    final AppStateModel model = ScopedModel.of<AppStateModel>(context);
-    final int numProducts = AppStateModel()
-        .productsInCart
-        .keys
-        .length; //model.productsInCart.keys.length;
-    final int totalCartQuantity =
-        AppStateModel().totalCartQuantity; // model.totalCartQuantity;
+    final model = AppStateModel();
+    final int numProducts = model.productsInCart.keys.length;
+    final int totalCartQuantity = model.totalCartQuantity;
     final Size screenSize = MediaQuery.of(context).size;
     final double screenWidth = screenSize.width;
     final double screenHeight = screenSize.height;
@@ -423,14 +419,6 @@ class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
               builder: _buildCart,
               animation: _controller,
             ),
-//            child: ScopedModelDescendant<AppStateModel>(
-//              builder: (BuildContext context, Widget child, AppStateModel model) {
-//                return AnimatedBuilder(
-//                  builder: _buildCart,
-//                  animation: _controller,
-//                );
-//              },
-//            ),
           ),
         ),
       ),
@@ -462,19 +450,14 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
     super.initState();
     _list = _ListModel(
       listKey: _listKey,
-      initialItems: AppStateModel()
-          .productsInCart
-          .keys
-          .toList(), // ScopedModel.of<AppStateModel>(context).productsInCart.keys.toList(),
+      initialItems: AppStateModel().productsInCart.keys.toList(),
       removedItemBuilder: _buildRemovedThumbnail,
     );
     _internalList = List<int>.from(_list.list);
   }
 
   Product _productWithId(int productId) {
-//    final AppStateModel model = ScopedModel.of<AppStateModel>(context);
-    final Product product = AppStateModel()
-        .getProductById(productId); // model.getProductById(productId);
+    final Product product = AppStateModel().getProductById(productId);
     return product;
   }
 
@@ -561,10 +544,6 @@ class _ProductThumbnailRowState extends State<ProductThumbnailRow> {
   Widget build(BuildContext context) {
     _updateLists();
     return SetState(builder: (context, object) => _buildAnimatedList());
-//    return ScopedModelDescendant<AppStateModel>(
-//      builder: (BuildContext context, Widget child, AppStateModel model)
-//      => _buildAnimatedList(),
-//    );
   }
 }
 
@@ -578,7 +557,7 @@ class ExtraProductsNumber extends StatelessWidget {
   // including their duplicates (but not duplicates of products shown as
   // thumbnails).
   int _calculateOverflow() {
-    //}AppStateModel model) {
+    //
     final Map<int, int> productMap = AppStateModel().productsInCart;
     // List created to be able to access products by index instead of ID.
     // Order is guaranteed because productsInCart returns a LinkedHashMap.
@@ -612,10 +591,6 @@ class ExtraProductsNumber extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SetState(builder: (context, obj) => _buildOverflow());
-//    return ScopedModelDescendant<AppStateModel>(
-//      builder: (BuildContext builder, Widget child, AppStateModel model)
-//      => _buildOverflow(model, context),
-//    );
   }
 }
 
@@ -651,7 +626,8 @@ class ProductThumbnail extends StatelessWidget {
             image: DecorationImage(
               image: ExactAssetImage(
                 'assets/${product.assetName}', // asset name
-//                package: product.assetPackage, // asset package
+                bundle: DefaultAssetBundle.of(context),
+//                package: 'shrine_mvc', // asset package
               ),
               fit: BoxFit.cover,
             ),

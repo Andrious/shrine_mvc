@@ -17,7 +17,9 @@ import 'package:flutter/services.dart';
 
 import 'package:prefs/prefs.dart' show Prefs;
 
-import 'package:shrine_mvc/src/view.dart' show App, L10n, LoginPage;
+import 'package:shrine_mvc/src/model.dart' show AppStateModel;
+
+import 'package:shrine_mvc/src/view.dart' show L10n;
 
 const Cubic _kAccelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
 const Cubic _kDecelerateCurve = Cubic(0.23, 0.94, 0.41, 1);
@@ -337,7 +339,7 @@ class _BackdropState extends State<Backdrop>
       onSelected: (Locale value) {
         L10n.setLocale(value);
         Prefs.setString('locale', value.toString());
-        App.refresh();
+        AppStateModel().refresh();
       },
       itemBuilder: (BuildContext context) => <PopupMenuItem<Locale>>[
         const PopupMenuItem<Locale>(

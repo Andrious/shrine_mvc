@@ -15,7 +15,7 @@
 import 'package:shrine_mvc/src/view.dart';
 
 ///
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   ///
   const HomePage({
     this.expandingBottomSheet,
@@ -30,20 +30,44 @@ class HomePage extends StatelessWidget {
   final Backdrop? backdrop;
 
   @override
+  State createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage>
+    with SingleTickerProviderStateMixin {
+  @override
+  void initState() {
+    super.initState();
+    aniController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 450),
+      value: 1,
+    );
+  }
+
+  late AnimationController aniController;
+
+  @override
+  void dispose() {
+    aniController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return SetState(builder: (context, _) {
-      final Widget child = expandingBottomSheet ??
-          ExpandingBottomSheet(hideController: ShrineApp.aniController);
+      final Widget child = widget.expandingBottomSheet ??
+          ExpandingBottomSheet(hideController: aniController);
       return Stack(
         children: <Widget>[
           Backdrop(
             frontLayer: const ProductPage(),
             backLayer: CategoryMenuPage(
-              onCategoryTap: () => ShrineApp.aniController.forward(),
+              onCategoryTap: () => aniController.forward(),
             ),
             frontTitle: L10n.t('Shrine'),
             backTitle: L10n.t('Menu'),
-            controller: ShrineApp.aniController,
+            controller: aniController,
           ),
           Align(
             alignment: Alignment.bottomRight,

@@ -140,7 +140,7 @@ class ShoppingCartSummary extends StatelessWidget {
       decimalDigits: 2,
       locale: Localizations.localeOf(context).toString(),
     );
-
+    final model = AppStateModel();
     return Row(
       children: <Widget>[
         const SizedBox(width: _leftColumnWidth),
@@ -155,7 +155,7 @@ class ShoppingCartSummary extends StatelessWidget {
                       child: Text('TOTAL'),
                     ),
                     Text(
-                      formatter.format(AppStateModel().totalCost),
+                      formatter.format(model.totalCost),
                       style: largeAmountStyle,
                     ),
                   ],
@@ -167,7 +167,7 @@ class ShoppingCartSummary extends StatelessWidget {
                       child: Text('Subtotal:'),
                     ),
                     Text(
-                      formatter.format(AppStateModel().subtotalCost),
+                      formatter.format(model.subtotalCost),
                       style: smallAmountStyle,
                     ),
                   ],
@@ -179,7 +179,7 @@ class ShoppingCartSummary extends StatelessWidget {
                       child: Text('Shipping:'),
                     ),
                     Text(
-                      formatter.format(AppStateModel().shippingCost),
+                      formatter.format(model.shippingCost),
                       style: smallAmountStyle,
                     ),
                   ],
@@ -191,7 +191,7 @@ class ShoppingCartSummary extends StatelessWidget {
                       child: Text('Tax:'),
                     ),
                     Text(
-                      formatter.format(AppStateModel().tax),
+                      formatter.format(model.tax),
                       style: smallAmountStyle,
                     ),
                   ],

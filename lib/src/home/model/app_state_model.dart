@@ -14,14 +14,10 @@
 
 //import 'package:scoped_model/scoped_model.dart';
 
-// import 'package:scoped_model/scoped_model.dart';
-
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/controller.dart' show ControllerMVC;
 
 import 'package:shrine_mvc/src/model.dart'
     show Category, Product, ProductsRepository;
-
-import 'package:shrine_mvc/src/controller.dart' show ControllerMVC;
 
 double _salesTaxRate = 0.06;
 double _shippingCostPerItem = 7;
@@ -31,7 +27,7 @@ class AppStateModel extends ControllerMVC {
   //} extends Model {
   ///
   factory AppStateModel() => _this ??= AppStateModel._();
-  AppStateModel._();
+  AppStateModel._() : super();
   static AppStateModel? _this;
 
   // All the available products.
@@ -56,15 +52,15 @@ class AppStateModel extends ControllerMVC {
 
   /// Totaled prices of the items in the cart.
   double get subtotalCost {
-    return _productsInCart.keys
-        .map((int id) => _availableProducts![id].price * _productsInCart[id]!)
-        .fold(0, (double sum, int e) => sum + e);
-  }
-
-  /// Total shipping cost for the items in the cart.
-  double get shippingCost {
-    return _shippingCostPerItem *
-        _productsInCart.values.fold(0.0, (num sum, int e) => sum + e);
+    double total;
+    if (_productsInCart.isEmpty) {
+      total = 0;
+    } else {
+      total = _productsInCart.keys
+          .map((int id) => _availableProducts![id].price * _productsInCart[id]!)
+          .fold(0, (double sum, int e) => sum + e);
+    }
+    return total;
   }
 
   /// Sales tax for the items in the cart
@@ -72,6 +68,12 @@ class AppStateModel extends ControllerMVC {
 
   /// Total cost to order everything in the cart.
   double get totalCost => subtotalCost + shippingCost + tax;
+
+  /// Total shipping cost for the items in the cart.
+  double get shippingCost {
+    return _shippingCostPerItem *
+        _productsInCart.values.fold(0.0, (num sum, int e) => sum + e);
+  }
 
   /// Returns a copy of the list of available products, filtered by category.
   List<Product> getProducts() {
@@ -88,6 +90,15 @@ class AppStateModel extends ControllerMVC {
     }
   }
 
+  /// Update the App's interface with InheritedWidgets
+  @override
+  void refresh() {
+    // Update the App's 'root' State (i.e. App's Title)
+    rootState?.buildInherited();
+    // Update the App's main screen (i.e. Product Page)
+    buildInherited();
+  }
+
   /// Adds a product to the cart.
   void addProductToCart(int productId) {
     if (!_productsInCart.containsKey(productId)) {
@@ -96,7 +107,7 @@ class AppStateModel extends ControllerMVC {
       int count = _productsInCart[productId]!;
       _productsInCart[productId] = count++;
     }
-    App.refresh();
+    refresh();
   }
 
   /// Removes an item from the cart.
@@ -109,7 +120,7 @@ class AppStateModel extends ControllerMVC {
         _productsInCart[productId] = product--;
       }
     }
-    App.refresh();
+    refresh();
   }
 
   /// Returns the Product instance matching the provided id.
@@ -120,7 +131,7 @@ class AppStateModel extends ControllerMVC {
   /// Removes everything from the cart.
   void clearCart() {
     _productsInCart.clear();
-    App.refresh();
+    refresh();
   }
 
   /// Loads the list of available products from the repo.

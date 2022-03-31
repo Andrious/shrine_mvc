@@ -17,7 +17,7 @@ import 'package:flutter/material.dart';
 import 'package:shrine_mvc/src/model.dart' show AppStateModel, Category;
 
 import 'package:shrine_mvc/src/view.dart'
-    show App, L10n, kShrineBrown900, kShrinePink100, kShrinePink400;
+    show L10n, kShrineBrown900, kShrinePink100, kShrinePink400;
 
 ///
 class CategoryMenuPage extends StatelessWidget {
@@ -59,9 +59,7 @@ class CategoryMenuPage extends StatelessWidget {
       onTap: () {
         model.setCategory(category);
         onCategoryTap();
-        App.refresh();
-//        model.rootState?.buildInherited();
-        model.buildInherited();
+        model.refresh();
       },
       child: model.selectedCategory == category
           ? Column(

@@ -1,4 +1,8 @@
 
+## 2.1.0
+ March 30, 2022
+- model.refresh() calls rootState?.buildInherited() and buildInherited();
+
 ## 2.0.0
  March 25, 2022
 - sdk: ">=2.3.0 <3.0.0" to  sdk: ">=2.16.1 <3.0.0"

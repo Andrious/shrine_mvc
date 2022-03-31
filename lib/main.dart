@@ -20,7 +20,8 @@ void main() {
 ///
 class MyApp extends AppStatefulWidget {
   ///
-  MyApp({Key? key}) : super(key: key);
+  // Global key to 'keep' the State object and just move around the Widget tree
+  MyApp({Key? key}) : super(key: key ?? GlobalKey(debugLabel: 'shrine'));
 
   @override
   AppState createAppState() => ShrineApp();
