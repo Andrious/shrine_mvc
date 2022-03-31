@@ -46,10 +46,19 @@ class _HomePageState extends State<HomePage>
   }
 
   late AnimationController aniController;
+  // Flag to dispose only once.
+  bool animaDisposed = false;
 
   @override
   void dispose() {
-    aniController.dispose();
+    if (aniController.isAnimating) {
+      aniController.stop();
+    }
+    if (!animaDisposed) {
+      animaDisposed = true;
+      //Errors if called more than once?!
+      aniController.dispose();
+    }
     super.dispose();
   }
 

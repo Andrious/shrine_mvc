@@ -314,14 +314,14 @@ packages:
       name: mvc_application
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.9.1"
+    version: "8.10.0+02"
   mvc_pattern:
     dependency: transitive
     description:
       name: mvc_pattern
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.9.1"
+    version: "8.10.0"
   nm:
     dependency: transitive
     description:
