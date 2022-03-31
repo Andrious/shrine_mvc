@@ -141,6 +141,7 @@ class ShoppingCartSummary extends StatelessWidget {
       locale: Localizations.localeOf(context).toString(),
     );
     final model = AppStateModel();
+    model.widgetInherited(context);
     return Row(
       children: <Widget>[
         const SizedBox(width: _leftColumnWidth),

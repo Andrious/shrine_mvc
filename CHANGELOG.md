@@ -1,4 +1,8 @@
 
+## 2.1.1
+ March 31, 2022
+- Update ShoppingCartSummary with model.widgetInherited(context);
+
 ## 2.1.0
  March 30, 2022
 - model.refresh() calls rootState?.buildInherited() and buildInherited();
