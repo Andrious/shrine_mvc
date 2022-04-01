@@ -1,5 +1,5 @@
 
-## 2.1.1+02
+## 2.1.1+03
  March 31, 2022
 - Update ShoppingCartSummary with model.widgetInherited(context);
 - bool animaDisposed = false; // Flag to dispose only once.

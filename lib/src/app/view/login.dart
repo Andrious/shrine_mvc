@@ -28,94 +28,85 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
 
   @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: Colors.white,
-//        brightness: Brightness.light,
-        leading: IconButton(
-          icon: const BackButtonIcon(),
-          tooltip: MaterialLocalizations.of(context).backButtonTooltip,
-          onPressed: () {
-            // The login screen is immediately displayed on top of the Shrine
-            // home screen using onGenerateRoute and so rootNavigator must be
-            // set to true in order to get out of Shrine completely.
-            Navigator.of(context, rootNavigator: true).pop();
-          },
+  Widget build(BuildContext context) => Scaffold(
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const BackButtonIcon(),
+            tooltip: MaterialLocalizations.of(context).backButtonTooltip,
+            onPressed: () {
+              // The login screen is immediately displayed on top of the Shrine
+              // home screen using onGenerateRoute and so rootNavigator must be
+              // set to true in order to get out of Shrine completely.
+              //             Navigator.of(context, rootNavigator: true).pop();
+              Navigator.pop(context);
+            },
+          ),
         ),
-      ),
-      body: SafeArea(
-        child: ListView(
-          padding: const EdgeInsets.symmetric(horizontal: 24),
-          children: <Widget>[
-            const SizedBox(height: 80),
-            Column(
-              children: <Widget>[
-                Image.asset('assets/diamond.png'),
-                const SizedBox(height: 16),
-                Text(
-                  'SHRINE'.tr,
-                  style: Theme.of(context).textTheme.headline1,
-                ),
-              ],
-            ),
-            const SizedBox(height: 120),
-            PrimaryColorOverride(
-              color: kShrineBrown900,
-              child: TextField(
-                controller: _usernameController,
-                decoration: InputDecoration(
-                  labelText: 'Username'.tr,
+        body: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            children: <Widget>[
+              const SizedBox(height: 80),
+              Column(
+                children: <Widget>[
+                  Image.asset('assets/diamond.png'),
+                  const SizedBox(height: 16),
+                  Text(
+                    'SHRINE'.tr,
+                    style: Theme.of(context).textTheme.headline2,
+                  ),
+                ],
+              ),
+              const SizedBox(height: 120),
+              PrimaryColorOverride(
+                color: kShrineBrown900,
+                child: TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Username'.tr,
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 12),
-            PrimaryColorOverride(
-              color: kShrineBrown900,
-              child: TextField(
-                controller: _passwordController,
-                decoration: InputDecoration(
-                  labelText: 'Password'.tr,
+              const SizedBox(height: 12),
+              PrimaryColorOverride(
+                color: kShrineBrown900,
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Password'.tr,
+                  ),
                 ),
               ),
-            ),
-            Wrap(
-              children: <Widget>[
-                ButtonBar(
-                  children: <Widget>[
-                    ElevatedButton(
-                      child: Text('Cancel'.tr),
-                      // shape: const BeveledRectangleBorder(
-                      //   borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      // ),
-                      onPressed: () {
-                        // The login screen is immediately displayed on top of
-                        // the Shrine home screen using onGenerateRoute and so
-                        // rootNavigator must be set to true in order to get out
-                        // of Shrine completely.
-                        Navigator.of(context, rootNavigator: true).pop();
-                      },
-                    ),
-                    ElevatedButton(
-                      child: Text('Next'.tr),
-                      // elevation: 8.0,
-                      // shape: const BeveledRectangleBorder(
-                      //   borderRadius: BorderRadius.all(Radius.circular(7.0)),
-                      // ),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ],
+              const SizedBox(height: 10),
+              Text('Login is disabled. Tap any button to continue.'.tr),
+              const SizedBox(height: 2),
+              Wrap(
+                children: <Widget>[
+                  ButtonBar(
+                    children: <Widget>[
+                      ElevatedButton(
+                        child: Text('Cancel'.tr),
+                        onPressed: () {
+                          Navigator.pop(context);
+                          //              Navigator.of(context, rootNavigator: true).pop();
+                        },
+                      ),
+                      ElevatedButton(
+                        child: Text('Next'.tr),
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
-      ),
-    );
-  }
+      );
 }
 
 ///
