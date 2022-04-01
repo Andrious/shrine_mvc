@@ -22,6 +22,9 @@ class AppTranslations extends L10n {
 
 /// French Translations
 Map<String, String> frWords = {
+  'English': 'Anglais',
+  'French': 'Français',
+  'Spanish': 'Espagnol',
   'Shrine': 'Tombeau',
   'SHRINE': 'TOMBEAU',
   'Username': "nom d'utilisateur",
@@ -74,6 +77,9 @@ Map<String, String> frWords = {
 
 /// Spanish Translations
 Map<String, String> esWords = {
+  'English': 'Inglés',
+  'French': 'Francés',
+  'Spanish': 'Español',
   'Shrine': 'Santuario',
   'SHRINE': 'SANTUARIO',
   'Username': 'nombre de usuario',

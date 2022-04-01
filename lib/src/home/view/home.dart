@@ -57,7 +57,8 @@ class _HomePageState extends State<HomePage>
     if (!animaDisposed) {
       animaDisposed = true;
       //Errors if called more than once?!
-      aniController.dispose();
+//todo: It's still called for some reason?!
+//      aniController.dispose();
     }
     super.dispose();
   }

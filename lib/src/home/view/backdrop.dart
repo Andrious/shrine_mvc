@@ -13,13 +13,14 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+
 import 'package:flutter/services.dart';
 
 import 'package:prefs/prefs.dart' show Prefs;
 
 import 'package:shrine_mvc/src/model.dart' show AppStateModel;
 
-import 'package:shrine_mvc/src/view.dart' show L10n;
+import 'package:shrine_mvc/src/view.dart' show AppPopupMenu, L10n;
 
 const Cubic _kAccelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
 const Cubic _kDecelerateCurve = Cubic(0.23, 0.94, 0.41, 1);
@@ -323,7 +324,8 @@ class _BackdropState extends State<Backdrop>
         //     );
         //   },
         // ),
-        menuButton(),
+//        _menuButton(),
+        _PopMenu().popupMenuButton,
       ],
     );
     return Scaffold(
@@ -333,22 +335,23 @@ class _BackdropState extends State<Backdrop>
       ),
     );
   }
+}
 
-  PopupMenuButton<Locale> menuButton() {
-    return PopupMenuButton<Locale>(
-      onSelected: (Locale value) {
-        L10n.setLocale(value);
-        Prefs.setString('locale', value.toString());
-        AppStateModel().refresh();
-      },
-      itemBuilder: (BuildContext context) => <PopupMenuItem<Locale>>[
-        const PopupMenuItem<Locale>(
-            value: Locale('en', 'US'), child: Text('en')),
-        const PopupMenuItem<Locale>(
-            value: Locale('fr', 'FR'), child: Text('fr')),
-        const PopupMenuItem<Locale>(
-            value: Locale('es', 'AR'), child: Text('es')),
-      ],
-    );
+class _PopMenu extends AppPopupMenu<Locale> {
+  @override
+  List<PopupMenuItem<Locale>> get menuItems => [
+        PopupMenuItem<Locale>(
+            value: const Locale('en', 'US'), child: L10n.t('English')),
+        PopupMenuItem<Locale>(
+            value: const Locale('fr', 'FR'), child: L10n.t('French')),
+        PopupMenuItem<Locale>(
+            value: const Locale('es', 'AR'), child: L10n.t('Spanish')),
+      ];
+
+  @override
+  void onSelection(Locale value) {
+    L10n.setLocale(value);
+    Prefs.setString('locale', value.toString());
+    AppStateModel().refresh();
   }
 }

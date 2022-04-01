@@ -1,6 +1,6 @@
-import 'package:shrine_mvc/src/model.dart' show AppStateModel, AppTrs;
-
 import 'package:shrine_mvc/src/controller.dart' as c;
+
+import 'package:shrine_mvc/src/model.dart' show AppStateModel, AppTrs;
 
 import 'package:shrine_mvc/src/view.dart';
 
