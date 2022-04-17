@@ -1,10 +1,10 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 2.1.1+03
+version: 2.1.1+04
 
 environment:
-  sdk: ">=2.16.1 <3.0.0"
+  sdk: ">=2.16.2 <3.0.0"
 
 dependencies:
 
@@ -36,6 +36,27 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
+  # To create an MSIX distribution for the Microsoft Store
+  msix: ^3.0.0
+
+msix_config:
+  display_name: Shrine Flutter Demo Only
+  publisher_display_name: Andrious Solutions Ltd.
+  identity_name: AndriousSolutionsLtd.ShrineFlutterDemoOnly
+#  capabilities: 'internetClient,location,microphone,webcam'
+#  certificate_path: C:/<PathToCertificate>/<MyCertificate.pfx>
+#  certificate_password: 1234 (require if using .pfx certificate)
+#  certificate_subject: CN=MyName
+  logo_path: C:\Programs\Tools\Projects\Flutter\examples\shrine_mvc\windows_logo.png
+  start_menu_icon_path: C:\Programs\Tools\Projects\Flutter\examples\shrine_mvc\windows_logo.png
+  tile_icon_path: C:\Programs\Tools\Projects\Flutter\examples\shrine_mvc\windows_logo.png
+  icons_background_color: transparent
+  languages: en
+  architecture: x64
+  publisher: CN=D21AD24D-2385-4919-912B-45D7C00CDFDE
+  store: true
+  install_certificate: false
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -89,18 +110,6 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-
-  # To add assets to your application, add an assets section, like this:
-  # assets:
-  #  - images/a_dot_burr.jpeg
-  #  - images/a_dot_ham.jpeg
-
-  # An image asset can refer to one or more resolution-specific "variants", see
-  # https://flutter.dev/assets-and-images/#resolution-aware.
-
-  # For details regarding adding assets from package dependencies, see
-  # https://flutter.dev/assets-and-images/#from-packages
 
   # To add custom fonts to your application, add a fonts section here,
   # in this "flutter" section. Each entry in this list should have a

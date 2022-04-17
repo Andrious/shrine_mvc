@@ -67,7 +67,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return SetState(builder: (context, _) {
       final Widget child = widget.expandingBottomSheet ??
-          ExpandingBottomSheet(hideController: aniController);
+          ExpandingBottomSheet(key: GlobalKey(), hideController: aniController);
       return Stack(
         children: <Widget>[
           Backdrop(

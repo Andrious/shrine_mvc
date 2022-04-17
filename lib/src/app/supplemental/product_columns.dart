@@ -49,6 +49,7 @@ class TwoProductCardColumn extends StatelessWidget {
           : 49.0 / 33.0;
 
       return ListView(
+        primary: false,
         physics: const ClampingScrollPhysics(),
         children: <Widget>[
           Padding(
@@ -89,6 +90,7 @@ class OneProductCardColumn extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView(
+      primary: false,
       physics: const ClampingScrollPhysics(),
       reverse: true,
       children: <Widget>[

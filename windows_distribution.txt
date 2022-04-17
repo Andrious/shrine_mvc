@@ -1,0 +1,10 @@
+keytool -genkey -v -keystore C:\Users\gtfpe\KeyStore\shrine_mvc.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias shrine
+
+
+msix_config:
+  display_name: Shrine Flutter Demo Only  <--- Reserve the name
+  publisher_display_name: Andrious Solutions Ltd.
+  identity_name:                 <--- Get this under 'Product Identity'
+
+
+flutter pub run msix:create

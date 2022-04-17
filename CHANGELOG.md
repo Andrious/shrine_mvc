@@ -1,4 +1,10 @@
 
+## 2.1.1+04
+ April 16, 2022
+- ListView(primary: false,
+- home: HomePage(key: GlobalKey()),
+- windows_logo.png
+
 ## 2.1.1+03
  March 31, 2022
 - Update ShoppingCartSummary with model.widgetInherited(context);

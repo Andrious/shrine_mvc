@@ -10,10 +10,10 @@ class ShrineApp extends AppState {
   ShrineApp()
       : super(
           con: c.ShrineApp(),
-          home: const HomePage(),
+          home: HomePage(key: GlobalKey()),
           object: AppStateModel(),
           onGenerateTitle: (context) => 'Shrine'.tr,
-          useInheritedMediaQuery: kIsWeb,
+          useInheritedMediaQuery: kIsWeb,  // for Device preview
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,

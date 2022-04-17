@@ -14,12 +14,12 @@
 
 import 'dart:ui' show PointerDeviceKind;
 
-import 'package:shrine_mvc/src/view.dart';
+import 'package:shrine_mvc/src/app/supplemental/product_columns.dart'
+    show OneProductCardColumn, TwoProductCardColumn;
 
 import 'package:shrine_mvc/src/model.dart' show Product;
 
-import 'package:shrine_mvc/src/app/supplemental/product_columns.dart'
-    show OneProductCardColumn, TwoProductCardColumn;
+import 'package:shrine_mvc/src/view.dart';
 
 ///
 class AsymmetricView extends StatelessWidget {
@@ -97,6 +97,7 @@ class AsymmetricView extends StatelessWidget {
     return ScrollConfiguration(
       behavior: _BrowserScrollBehavior(),
       child: ListView(
+        primary: false,
         scrollDirection: Axis.horizontal,
         padding: kIsWeb ? null : const EdgeInsets.fromLTRB(0, 34, 16, 44),
         physics: const AlwaysScrollableScrollPhysics(),
@@ -109,10 +110,11 @@ class AsymmetricView extends StatelessWidget {
 class _BrowserScrollBehavior extends MaterialScrollBehavior {
   // Override behavior methods and getters like dragDevices
   @override
-  Set<PointerDeviceKind> get dragDevices => !kIsWeb
-      ? super.dragDevices
-      : {
-          PointerDeviceKind.touch,
-          PointerDeviceKind.mouse,
-        };
+  Set<PointerDeviceKind> get dragDevices =>
+      UniversalPlatform.isAndroid || UniversalPlatform.isIOS
+          ? super.dragDevices
+          : {
+              PointerDeviceKind.touch,
+              PointerDeviceKind.mouse,
+            };
 }

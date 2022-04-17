@@ -104,6 +104,11 @@ test/
 
 ## Don't need the Android stuff
 android/
+
+# Exceptions to above rules.
+!android/app/buid.gradle
+!android/local.properties
+
 # Android related
 google-services.json
 **/android/**/gradle-wrapper.jar
