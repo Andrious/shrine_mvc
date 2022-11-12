@@ -1,10 +1,11 @@
 name: shrine_mvc
 description: The Shrine Sample App using the MVC design pattern.
 
-version: 2.1.1+04
+version: 2.2.0
 
 environment:
-  sdk: ">=2.16.2 <3.0.0"
+#  sdk: ">=2.16.2 <3.0.0"
+  sdk: ">=2.18.0 <3.0.0"
 
 dependencies:
 
@@ -26,9 +27,13 @@ dependencies:
 ## https://pub.dev/packages/flutter_cupertino_localizations
 #  flutter_cupertino_localizations: ^1.0.0
 
-# https://pub.dev/packages/mvc_application
-  mvc_application: ^8.0.0
-#    path: ../../packages/mvc_application
+## https://pub.dev/packages/mvc_application
+#  mvc_application: ^8.0.0
+##    path: ../../packages/mvc_application
+
+  # https://pub.dev/packages/fluttery_framework
+  fluttery_framework: ^1.0.0
+  #    path: ../../packages/fluttery_framework
 
 # https://pub.dev/packages/path_provider
   path_provider: ^2.0.0

@@ -37,11 +37,11 @@ class ProductPage extends StatefulWidget {
   State<StatefulWidget> createState() => _ProductPageState();
 }
 
-class _ProductPageState extends StateMVC<ProductPage> {
+class _ProductPageState extends StateX<ProductPage> {
   _ProductPageState() : super(AppStateModel());
   @override
   Widget build(context) {
-    widgetInherited(context);
+    dependOnInheritedWidget(context);
     final model = controller as AppStateModel;
     model.loadProducts();
     return AsymmetricView(products: model.getProducts());

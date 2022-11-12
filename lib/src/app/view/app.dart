@@ -1,6 +1,6 @@
 import 'package:shrine_mvc/src/controller.dart' as c;
 
-import 'package:shrine_mvc/src/model.dart' show AppStateModel, AppTrs;
+import 'package:shrine_mvc/src/model.dart';
 
 import 'package:shrine_mvc/src/view.dart';
 
@@ -9,23 +9,32 @@ class ShrineApp extends AppState {
   ///
   ShrineApp()
       : super(
-          con: c.ShrineApp(),
+          controller: c.ShrineApp(),
           home: HomePage(key: GlobalKey()),
           object: AppStateModel(),
           onGenerateTitle: (context) => 'Shrine'.tr,
-          useInheritedMediaQuery: kIsWeb,  // for Device preview
+          useInheritedMediaQuery: kIsWeb, // for Device preview
           initialRoute: '/login',
           onGenerateRoute: _getRoute,
           debugShowCheckedModeBanner: false,
-          localeResolutionCallback: AppTrs.localeResolutionCallback,
-          supportedLocales: AppTrs.supportedLocales,
+          localeResolutionCallback: L10n.localeResolutionCallback,
+          supportedLocales: L10n.supportedLocales,
           localizationsDelegates: [
             GlobalMaterialLocalizations.delegate,
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
-            L10n.delegate!,
+            L10n.delegate,
           ],
         );
+
+  @override
+  void initState() {
+    super.initState();
+    L10n.translations = {
+      const Locale('es', 'AR'): esWords,
+      const Locale('fr', 'FR'): frWords,
+    };
+  }
 
   // Copy the platform from the main theme in order to support platform
   // toggling from the Gallery options menu.

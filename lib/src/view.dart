@@ -20,7 +20,8 @@
 ///          Created  17 Aug 2019
 ///
 ///
-export 'package:mvc_application/view.dart';
+
+export 'package:fluttery_framework/view.dart';
 
 export 'package:shrine_mvc/src/app/supplemental/asymmetric_view.dart';
 

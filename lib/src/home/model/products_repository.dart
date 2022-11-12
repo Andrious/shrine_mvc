@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-import 'package:mvc_application/view.dart';
+import 'package:fluttery_framework/view.dart';
 
 import 'package:shrine_mvc/src/model.dart';
 

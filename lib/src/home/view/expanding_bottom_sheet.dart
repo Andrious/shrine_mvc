@@ -22,7 +22,7 @@ import 'package:shrine_mvc/src/model.dart'
     show AppStateModel, Product, ShoppingCartPage;
 
 import 'package:shrine_mvc/src/view.dart'
-    show App, SetState, StateMVC, kShrinePink50;
+    show App, SetState, StateX, kShrinePink50;
 
 // These curves define the emphasized easing curve.
 const Cubic _kAccelerateCurve = Cubic(0.548, 0, 0.757, 0.464);
@@ -119,7 +119,7 @@ double _getPeakPoint({required double begin, required double end}) {
   return begin + (end - begin) * _kPeakVelocityProgress;
 }
 
-class _ExpandingBottomSheetState extends StateMVC<ExpandingBottomSheet>
+class _ExpandingBottomSheetState extends StateX<ExpandingBottomSheet>
     with TickerProviderStateMixin {
   _ExpandingBottomSheetState() : super(AppStateModel());
 

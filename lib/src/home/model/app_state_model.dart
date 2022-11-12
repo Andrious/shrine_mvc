@@ -14,7 +14,7 @@
 
 //import 'package:scoped_model/scoped_model.dart';
 
-import 'package:shrine_mvc/src/controller.dart' show ControllerMVC;
+import 'package:shrine_mvc/src/controller.dart' show StateXController;
 
 import 'package:shrine_mvc/src/model.dart'
     show Category, Product, ProductsRepository;
@@ -23,7 +23,7 @@ double _salesTaxRate = 0.06;
 double _shippingCostPerItem = 7;
 
 ///
-class AppStateModel extends ControllerMVC {
+class AppStateModel extends StateXController {
   //} extends Model {
   ///
   factory AppStateModel() => _this ??= AppStateModel._();
@@ -91,12 +91,11 @@ class AppStateModel extends ControllerMVC {
   }
 
   /// Update the App's interface with InheritedWidgets
-  @override
   void refresh() {
     // Update the App's 'root' State (i.e. App's Title)
-    rootState?.buildInherited();
+    rootState?.notifyClients();
     // Update the App's main screen (i.e. Product Page)
-    buildInherited();
+    notifyClients();
   }
 
   /// Adds a product to the cart.

@@ -2,24 +2,6 @@
 ///
 ///
 
-import 'package:shrine_mvc/src/view.dart';
-
-/// Global variable to reference the Translation class easily.
-//ignore: non_constant_identifier_names
-final AppTrs = AppTranslations();
-
-/// The Translation class
-class AppTranslations extends L10n {
-  @override
-  Map<Locale, Map<String, String>> get l10nMap => {
-        const Locale('es', 'AR'): esWords,
-        const Locale('fr', 'FR'): frWords,
-      };
-
-  @override
-  Locale get textLocale => const Locale('en', 'US');
-}
-
 /// French Translations
 Map<String, String> frWords = {
   'English': 'Anglais',

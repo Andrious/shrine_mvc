@@ -1,4 +1,8 @@
 
+## 2.2.0
+ November 11, 2022
+- import 'package:fluttery_framework/
+
 ## 2.1.1+04
  April 16, 2022
 - ListView(primary: false,

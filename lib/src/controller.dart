@@ -21,7 +21,8 @@
 ///
 ///
 
-export 'package:mvc_application/controller.dart';
+//export 'package:mvc_application/controller.dart';
+export 'package:fluttery_framework/controller.dart';
 
 export 'package:shrine_mvc/src/app/controller/app.dart';
 
